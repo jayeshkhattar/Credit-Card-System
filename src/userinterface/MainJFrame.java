@@ -4,6 +4,7 @@
  */
 package userinterface;
 
+import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
 
@@ -24,9 +25,11 @@ public class MainJFrame extends javax.swing.JFrame {
      */
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
+    private CustomerDirectory customerDirectory;
 
     public MainJFrame() {
         initComponents();
+        customerDirectory = new CustomerDirectory();
         system = dB4OUtil.retrieveSystem();
         this.setSize(1680, 1050);
     }
@@ -122,7 +125,30 @@ public class MainJFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void loginJButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginJButtonActionPerformed
-        // Get user name
+        system = dB4OUtil.retrieveSystem();
+
+        if(userNameJTextField.getText().isEmpty() || passwordField.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null,"Username and Password field's cannot be empty");
+            return;
+        }
+        
+        else if(system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), passwordField.getText()) == null) {
+            JOptionPane.showMessageDialog(null,"Invalid Username. Please enter valid username");
+            return;
+        }
+        
+        
+        UserAccount userAccount = system.getUserAccountDirectory().authenticateUser(userNameJTextField.getText(), passwordField.getText());
+        System.out.println(" Username  " + userNameJTextField.getText() + "--pass-- " + passwordField.getText());
+        
+        System.out.println("EcoSYSTEM MAIN " + system.toString() +"---"+ system.getUserAccountDirectory().getUserAccountList().size());
+        
+        CardLayout layout = (CardLayout) container.getLayout();
+        container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, system, customerDirectory));
+        layout.next(container);
+     //   lblLoginLabel.setText("<html>\n" + "Welcome!! \n" + "<br/>You are now logged in\n" + "</html>");
+        logoutJButton.setEnabled(true);
+        loginJButton.setEnabled(false);
        
     }//GEN-LAST:event_loginJButtonActionPerformed
 
