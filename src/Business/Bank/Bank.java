@@ -50,5 +50,10 @@ public class Bank {
 
     public void setBankAdminName(String adminName) {
         this.adminName = adminName;
+    }
+  
+    @Override
+    public String toString() {
+        return name;
     }    
 }

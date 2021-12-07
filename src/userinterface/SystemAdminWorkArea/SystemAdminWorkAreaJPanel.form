@@ -88,9 +88,9 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="btnManageEnterprise" max="32767" attributes="0"/>
-                                  <Component id="btnManageNetwork" max="32767" attributes="0"/>
-                                  <Component id="btnManageAdmin" max="32767" attributes="0"/>
+                                  <Component id="btnManageCardCompany" max="32767" attributes="0"/>
+                                  <Component id="btnManageBank" max="32767" attributes="0"/>
+                                  <Component id="btnManageMerchant" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -107,11 +107,11 @@
                           <Component id="lblSelectedNode" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="54" max="-2" attributes="0"/>
-                      <Component id="btnManageNetwork" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnManageBank" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnManageEnterprise" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnManageCardCompany" min="-2" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnManageAdmin" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnManageMerchant" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="189" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -128,28 +128,28 @@
                 <Property name="text" type="java.lang.String" value="&lt;View_selected_node&gt;"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JButton" name="btnManageNetwork">
+            <Component class="javax.swing.JButton" name="btnManageBank">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Manage Banks"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageNetworkActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageBankActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnManageEnterprise">
+            <Component class="javax.swing.JButton" name="btnManageCardCompany">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Manage Card Company"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageEnterpriseActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageCardCompanyActionPerformed"/>
               </Events>
             </Component>
-            <Component class="javax.swing.JButton" name="btnManageAdmin">
+            <Component class="javax.swing.JButton" name="btnManageMerchant">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Manage Merchants"/>
               </Properties>
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageAdminActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageMerchantActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>

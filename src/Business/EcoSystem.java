@@ -10,6 +10,10 @@ import Business.Customer.CustomerDirectory;
 import Business.Role.Role;
 import Business.Role.SystemAdminRole;
 import java.util.ArrayList;
+import Business.Bank.BankDirectory;
+import Business.CardCompany.CardCompanyDirectory;
+import Business.Merchant.MerchantDirectory;
+
 
 /**
  *
@@ -19,10 +23,26 @@ public class EcoSystem extends Organization{
     
     private static EcoSystem business;
     private CustomerDirectory customerDirectory;
+    private BankDirectory bankDirectory;
+    private CardCompanyDirectory cardCompanyDirectory;
+    private MerchantDirectory merchantDirectory;
+    
 
-    public EcoSystem(CustomerDirectory customerDirectory) {
+    public EcoSystem() {
+        super(null);
+        customerDirectory = new CustomerDirectory();
+        bankDirectory = new BankDirectory();
+        cardCompanyDirectory = new CardCompanyDirectory();
+        merchantDirectory = new MerchantDirectory();
+        
+    }
+    
+    public EcoSystem(CustomerDirectory customerDirectory, BankDirectory bankDirectory, CardCompanyDirectory cardCompanyDirectory, MerchantDirectory merchantDirectory) {
 
         this.customerDirectory = customerDirectory;
+        this.bankDirectory = bankDirectory;
+        this.cardCompanyDirectory = cardCompanyDirectory;
+        this.merchantDirectory = merchantDirectory;
         
     }
 
@@ -35,6 +55,31 @@ public class EcoSystem extends Organization{
         this.customerDirectory = customerDirectory;
     }
 
+      public BankDirectory getBankDirectory() {
+        return bankDirectory;
+    }
+
+    public void setBankDirectory(BankDirectory bankDirectory) {
+        this.bankDirectory = bankDirectory;
+    }
+
+    public CardCompanyDirectory getCardCompanyDirectory() {
+        return cardCompanyDirectory;
+    }
+
+    public void setCardCompanyDirectory(CardCompanyDirectory cardCompanyDirectory) {
+        this.cardCompanyDirectory = cardCompanyDirectory;
+    }
+    
+    
+
+    public MerchantDirectory getMerchantDirectory() {
+        return merchantDirectory;
+    }
+
+    public void setMerchantDirectory(MerchantDirectory merchantDirectory) {
+        this.merchantDirectory = merchantDirectory;
+    }
     
     public static EcoSystem getInstance(){
         if(business==null){
@@ -48,12 +93,6 @@ public class EcoSystem extends Organization{
         ArrayList<Role> roleList=new ArrayList<Role>();
         roleList.add(new SystemAdminRole());
         return roleList;
-    }
-    private EcoSystem(){
-        super(null);
-        customerDirectory = new CustomerDirectory();
-        
-       // networkList=new ArrayList<Network>();
     }
 
     

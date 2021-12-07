@@ -8,7 +8,9 @@ package userinterface.SystemAdminWorkArea;
 import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
-
+import Business.Bank.BankDirectory;
+import Business.CardCompany.CardCompanyDirectory;
+import Business.Merchant.MerchantDirectory;
 import Business.Organization;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -28,12 +30,19 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
     JPanel userProcessContainer;
     EcoSystem ecosystem;
     CustomerDirectory customerDirectory;
+    BankDirectory bankDirectory;
+    CardCompanyDirectory cardCompanyDirectory;
+    MerchantDirectory merchantsDirectory;
     
-    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecosystem, CustomerDirectory customerDirectory) {
+    public SystemAdminWorkAreaJPanel(JPanel userProcessContainer, EcoSystem ecosystem) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecosystem = ecosystem;
         this.customerDirectory = ecosystem.getCustomerDirectory();
+        this.cardCompanyDirectory = ecosystem.getCardCompanyDirectory();
+        this.bankDirectory = ecosystem.getBankDirectory();
+        this.merchantsDirectory = ecosystem.getMerchantDirectory();
+        
         populateTree();
     }
     
@@ -53,11 +62,13 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         Customer customer;
         
         DefaultMutableTreeNode customerListNode = new DefaultMutableTreeNode("Customer");
-        DefaultMutableTreeNode deliveryManListNode  = new DefaultMutableTreeNode("Delivery");
-        DefaultMutableTreeNode restaurantListNode = new DefaultMutableTreeNode("Restaurant");
+        DefaultMutableTreeNode bankListNode = new DefaultMutableTreeNode("Bank");
+        DefaultMutableTreeNode cardCompanyListNode  = new DefaultMutableTreeNode("Card Company");
+        //DefaultMutableTreeNode merchantListNode = new DefaultMutableTreeNode("Merchant");
         networks.insert(customerListNode, 0);
-        networks.insert(deliveryManListNode, 1);
-        networks.insert(restaurantListNode, 2);
+        networks.insert(bankListNode, 1);
+        networks.insert(cardCompanyListNode, 2);
+      //  networks.insert(merchantListNode, 3);
         
         DefaultMutableTreeNode networkNode;
         DefaultMutableTreeNode enterpriseNode;
@@ -69,7 +80,7 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             customerListNode.insert(networkNode, i);
             
         }    
-/*        for(int j=0; j<deliveryList.size();j++){
+       /* for(int j=0; j<deliveryList.size();j++){
             deliveryMan= deliveryList.get(j);
             enterpriseNode=new DefaultMutableTreeNode(deliveryMan.getDelivery_name());
             deliveryManListNode.insert(enterpriseNode, j);
@@ -79,8 +90,8 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             restaurant=restaurantList.get(k);
             organizationNode=new DefaultMutableTreeNode(restaurant.getRestaurantName());
             restaurantListNode.insert(organizationNode, k);
-        }
-           */
+        }*/
+           
         model.reload();
     }
     /**
@@ -99,9 +110,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblSelectedNode = new javax.swing.JLabel();
-        btnManageNetwork = new javax.swing.JButton();
-        btnManageEnterprise = new javax.swing.JButton();
-        btnManageAdmin = new javax.swing.JButton();
+        btnManageBank = new javax.swing.JButton();
+        btnManageCardCompany = new javax.swing.JButton();
+        btnManageMerchant = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -133,24 +144,24 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
         lblSelectedNode.setText("<View_selected_node>");
 
-        btnManageNetwork.setText("Manage Banks");
-        btnManageNetwork.addActionListener(new java.awt.event.ActionListener() {
+        btnManageBank.setText("Manage Banks");
+        btnManageBank.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageNetworkActionPerformed(evt);
+                btnManageBankActionPerformed(evt);
             }
         });
 
-        btnManageEnterprise.setText("Manage Card Company");
-        btnManageEnterprise.addActionListener(new java.awt.event.ActionListener() {
+        btnManageCardCompany.setText("Manage Card Company");
+        btnManageCardCompany.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageEnterpriseActionPerformed(evt);
+                btnManageCardCompanyActionPerformed(evt);
             }
         });
 
-        btnManageAdmin.setText("Manage Merchants");
-        btnManageAdmin.addActionListener(new java.awt.event.ActionListener() {
+        btnManageMerchant.setText("Manage Merchants");
+        btnManageMerchant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnManageAdminActionPerformed(evt);
+                btnManageMerchantActionPerformed(evt);
             }
         });
 
@@ -168,9 +179,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(btnManageEnterprise, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageNetwork, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageAdmin, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(btnManageCardCompany, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnManageBank, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnManageMerchant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(283, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -181,11 +192,11 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel1)
                     .addComponent(lblSelectedNode))
                 .addGap(54, 54, 54)
-                .addComponent(btnManageNetwork)
+                .addComponent(btnManageBank)
                 .addGap(18, 18, 18)
-                .addComponent(btnManageEnterprise)
+                .addComponent(btnManageCardCompany)
                 .addGap(18, 18, 18)
-                .addComponent(btnManageAdmin)
+                .addComponent(btnManageMerchant)
                 .addContainerGap(189, Short.MAX_VALUE))
         );
 
@@ -194,17 +205,27 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
         add(jSplitPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnManageNetworkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageNetworkActionPerformed
-       
-    }//GEN-LAST:event_btnManageNetworkActionPerformed
-
-    private void btnManageEnterpriseActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEnterpriseActionPerformed
+    private void btnManageBankActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageBankActionPerformed
+       ManageBankJPanel bank = new ManageBankJPanel(userProcessContainer, ecosystem, bankDirectory);
+       userProcessContainer.add("BankManagement",bank);
+       CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+       layout.next(userProcessContainer);
         
-    }//GEN-LAST:event_btnManageEnterpriseActionPerformed
+    }//GEN-LAST:event_btnManageBankActionPerformed
 
-    private void btnManageAdminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageAdminActionPerformed
-       
-    }//GEN-LAST:event_btnManageAdminActionPerformed
+    private void btnManageCardCompanyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCardCompanyActionPerformed
+       ManageCardCompanyJPanel cardCompany = new ManageCardCompanyJPanel(userProcessContainer, ecosystem, cardCompanyDirectory);
+       userProcessContainer.add("CardCompanyManagement",cardCompany);
+       CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+       layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageCardCompanyActionPerformed
+
+    private void btnManageMerchantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageMerchantActionPerformed
+       ManageMerchantJPanel mer = new ManageMerchantJPanel(userProcessContainer, ecosystem, merchantsDirectory);
+       userProcessContainer.add("MerchantManagement",mer);
+       CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+       layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnManageMerchantActionPerformed
 
     private void jTreeValueChanged(javax.swing.event.TreeSelectionEvent evt) {//GEN-FIRST:event_jTreeValueChanged
         
@@ -216,9 +237,9 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnManageAdmin;
-    private javax.swing.JButton btnManageEnterprise;
-    private javax.swing.JButton btnManageNetwork;
+    private javax.swing.JButton btnManageBank;
+    private javax.swing.JButton btnManageCardCompany;
+    private javax.swing.JButton btnManageMerchant;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

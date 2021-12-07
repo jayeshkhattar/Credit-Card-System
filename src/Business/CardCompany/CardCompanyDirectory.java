@@ -13,4 +13,25 @@ import java.util.ArrayList;
 public class CardCompanyDirectory {
     
     private ArrayList<CardCompany> cardCompanyDirectory;
+    public CardCompanyDirectory() {
+        cardCompanyDirectory = new ArrayList<CardCompany>();
+    }
+
+    public ArrayList<CardCompany> getCardCompanyDirectory() {
+        return cardCompanyDirectory;
+    }
+
+    public void setCardCompanyDirectory(ArrayList<CardCompany> cardCompanyDirectory) {
+        this.cardCompanyDirectory = cardCompanyDirectory;
+    }
+    
+    public CardCompany newCardCompany(String name, String code, String address) {
+        CardCompany cardCompany = new CardCompany(name, code, address);
+        cardCompanyDirectory.add(cardCompany);
+        return cardCompany;
+    }
+    
+    public void removeCardCompany(CardCompany cardCompany) {
+        cardCompanyDirectory.remove(cardCompany);
+    }
 }
