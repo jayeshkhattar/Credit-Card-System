@@ -4,6 +4,7 @@
  */
 package Business.Product;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -12,5 +13,28 @@ import java.util.List;
  */
 public class ProductDirectory {
    
-    private List<Product> productList;
+    private ArrayList<Product> productDirectory;
+
+    public ProductDirectory() {
+        productDirectory = new ArrayList();
+    }
+
+    public ArrayList<Product> getProductDirectory() {
+        return productDirectory;
+    }
+
+    public void setProductDirectory(ArrayList<Product> productList) {
+        this.productDirectory = productList;
+    }
+    
+    public Product newProduct(String name, String code, int price, String category, int points) {
+        Product pr = new Product(name, code, price, category, points);
+        productDirectory.add(pr);
+        return pr;
+    }
+    
+    public void removeProduct(Product pr) {
+        productDirectory.remove(pr);
+    }
+    
 }

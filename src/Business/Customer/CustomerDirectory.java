@@ -9,7 +9,7 @@ import java.util.ArrayList;
 
 /**
  *
- * @author harold
+ * @author jayesh
  */
 public class CustomerDirectory {
     
@@ -29,23 +29,23 @@ public class CustomerDirectory {
         this.customerDirectory = customerDirectory;
     }
     
-    //public Customer newCustomer(String cust_name, String cust_email, String cust_phoneNumber, int cust_age, String cust_homeAddress, String cust_userName){
-      //  Customer customer = new Customer(cust_name, cust_email, cust_phoneNumber, cust_age, cust_homeAddress, cust_userName);
-       // customerDirectory.add(customer);
-      //  return customer;
-//    }
+    public Customer newCustomer(String name, String email, String phone, int age , int ssn, String Address, String username, String bankName){
+        Customer customer = new Customer(name, email, phone, age, ssn, Address, username, bankName);
+        customerDirectory.add(customer);
+        return customer;
+    }
     
     public void removeCustomer(Customer customer){
         customerDirectory.remove(customer);
     }
     
-  /*  public Customer getCustomer(String cust_name){
+    public Customer getCustomer(String name){
         for(Customer customer: customerDirectory){
-            if(customer.getCust_name().equalsIgnoreCase(cust_name)){
+            if(customer.getUserame().equalsIgnoreCase(name)){
                 return customer;
             }
         }
         return null;
-    }*/
+    }
     
 }

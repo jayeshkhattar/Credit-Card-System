@@ -10,16 +10,21 @@ import Business.UserAccount.UserAccount;
 import userinterface.SystemAdminWorkArea.SystemAdminWorkAreaJPanel;
 import javax.swing.JPanel;
 import Business.Customer.CustomerDirectory;
+import Business.Bank.BankDirectory;
+import Business.CardType.CardTypeList;
+import Business.Merchant.MerchantDirectory;
 
 /**
  *
- * @author raunak
+ * @author jayesh
  */
 public class SystemAdminRole extends Role{
 
   
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, CustomerDirectory customerDirectory) {
-        return new SystemAdminWorkAreaJPanel(userProcessContainer, business, customerDirectory);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
+        return new SystemAdminWorkAreaJPanel(userProcessContainer, business);
     }
+
+   
     
 }

@@ -5,10 +5,13 @@
 package userinterface;
 
 import Business.Customer.CustomerDirectory;
+import Business.Bank.BankDirectory;
+import Business.CardType.CardTypeList;
+import Business.Merchant.MerchantDirectory;
+
 import Business.EcoSystem;
 import Business.DB4OUtil.DB4OUtil;
 
-import Business.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -16,21 +19,25 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Lingfeng
+ * @author jayesh
  */
 public class MainJFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MainJFrame
      */
+    
     private EcoSystem system;
     private DB4OUtil dB4OUtil = DB4OUtil.getInstance();
     private CustomerDirectory customerDirectory;
+    private BankDirectory bankDirectory;
+    private CardTypeList cardCompanyDirectory;
+    private MerchantDirectory merchantDirectory;
 
     public MainJFrame() {
         initComponents();
-        customerDirectory = new CustomerDirectory();
         system = dB4OUtil.retrieveSystem();
+        this.setSize(1680, 1050);
         this.setSize(1680, 1050);
     }
 
@@ -144,7 +151,8 @@ public class MainJFrame extends javax.swing.JFrame {
         System.out.println("EcoSYSTEM MAIN " + system.toString() +"---"+ system.getUserAccountDirectory().getUserAccountList().size());
         
         CardLayout layout = (CardLayout) container.getLayout();
-        container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, system, customerDirectory));
+        
+        container.add("workArea",userAccount.getRole().createWorkArea(container, userAccount, system));
         layout.next(container);
      //   lblLoginLabel.setText("<html>\n" + "Welcome!! \n" + "<br/>You are now logged in\n" + "</html>");
         logoutJButton.setEnabled(true);

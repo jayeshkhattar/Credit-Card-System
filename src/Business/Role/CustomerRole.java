@@ -5,21 +5,24 @@
 package Business.Role;
 
 import Business.Customer.CustomerDirectory;
+import Business.Bank.BankDirectory;
+import Business.CardType.CardTypeList;
+import Business.Merchant.MerchantDirectory;
 import Business.EcoSystem;
 import Business.Organization;
 import Business.UserAccount.UserAccount;
 import javax.swing.JPanel;
+import userinterface.CustomerWorkArea.CustomerWorkAreaJPanel;
 
 /**
  *
- * @author raunak
+ * @author jayesh
  */
 public class CustomerRole extends Role{
 
     
-    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business, CustomerDirectory customerDirectory) {
-        return null;
-// return new CustomerAreaJPanel(userProcessContainer, account, business, customerDirectory);
+    public JPanel createWorkArea(JPanel userProcessContainer, UserAccount account, EcoSystem business) {
+        return new CustomerWorkAreaJPanel(userProcessContainer, account, business);
     }
     
     

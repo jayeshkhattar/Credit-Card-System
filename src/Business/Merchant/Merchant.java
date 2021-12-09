@@ -18,12 +18,12 @@ public class Merchant {
     private String phoneNumber;
     private ProductDirectory productDirectory;
 
-    public Merchant(String name, String address, String managerName, String phoneNumber, ProductDirectory productDirectory) {
+    public Merchant(String name, String address, String managerName, String phoneNumber) {//, ProductDirectory productDirectory
         this.name = name;
         this.address = address;
         this.managerName = managerName;
         this.phoneNumber = phoneNumber;
-        this.productDirectory = productDirectory;
+        //this.productDirectory = productDirectory;
     }
 
     public String getName() {
@@ -65,6 +65,11 @@ public class Merchant {
     public void setProductDirectory(ProductDirectory productDirectory) {
         this.productDirectory = productDirectory;
     }
+    
+     @Override
+    public String toString() {
+        return name;
+    } 
     
     
 }

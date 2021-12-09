@@ -4,6 +4,8 @@
  */
 package Business.Card;
 
+import Business.CardType.CardType;
+import Business.Customer.Customer;
 import java.util.Date;
 
 /**
@@ -13,27 +15,29 @@ import java.util.Date;
 public class Card {
     
     private String cardNumber;
-    private Date expiryDate;
+    private String expiryDate;
     private String cardHolderName;
-    private String cardType;
     private String cvv;    
     private int creditLimit;
     private int expenditure;
     private int totalPointsEarned;
     private int pointsRemaining;
-    private String cardPlatinumType;
+    private CardType cardType;
+    private Customer cardOwner;
+    private String status;
 
-    public Card(String cardNumber, Date expiryDate, String cardHolderName, String cardType, String cvv, int creditLimit, int expenditure, int totalPointsEarned, int pointsRemaining, String cardPlatinumType) {
+    public Card(String cardNumber, String expiryDate, String cardHolderName, String cvv, int creditLimit, int expenditure, int totalPointsEarned, int pointsRemaining, CardType cardType, Customer cardOwner, String status) {
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
         this.cardHolderName = cardHolderName;
-        this.cardType = cardType;
         this.cvv = cvv;
         this.creditLimit = creditLimit;
         this.expenditure = expenditure;
         this.totalPointsEarned = totalPointsEarned;
         this.pointsRemaining = pointsRemaining;
-        this.cardPlatinumType = cardPlatinumType;
+        this.cardType = cardType;
+        this.cardOwner = cardOwner;
+        this.status = status;
     }
 
     public String getCardNumber() {
@@ -44,11 +48,11 @@ public class Card {
         this.cardNumber = cardNumber;
     }
 
-    public Date getExpiryDate() {
+    public String getExpiryDate() {
         return expiryDate;
     }
 
-    public void setExpiryDate(Date expiryDate) {
+    public void setExpiryDate(String expiryDate) {
         this.expiryDate = expiryDate;
     }
 
@@ -60,11 +64,11 @@ public class Card {
         this.cardHolderName = cardHolderName;
     }
 
-    public String getCardType() {
+    public CardType getCardType() {
         return cardType;
     }
 
-    public void setCardType(String cardType) {
+    public void setCardType(CardType cardType) {
         this.cardType = cardType;
     }
 
@@ -108,13 +112,26 @@ public class Card {
         this.pointsRemaining = pointsRemaining;
     }
 
-    public String getCardPlatinumType() {
-        return cardPlatinumType;
+    public Customer getCardOwner() {
+        return cardOwner;
     }
 
-    public void setCardPlatinumType(String cardPlatinumType) {
-        this.cardPlatinumType = cardPlatinumType;
+    public void setCardOwner(Customer cardOwner) {
+        this.cardOwner = cardOwner;
     }
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+    
+    @Override
+    public String toString() {
+        return this.cardType.getName();
+    }
+    
     
 }
