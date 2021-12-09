@@ -78,7 +78,6 @@ public class SystemAdminWorkAreaJPanel extends javax.swing.JPanel {
             networkNode=new DefaultMutableTreeNode(customer.getName());
             customerListNode.insert(networkNode, i);
         }    
-
         model.reload();
     }
     /**

@@ -15,11 +15,11 @@ public class CardCompany {
     private String address;
     private String adminName;
 
-    public CardCompany(String name, String code, String address, String adminName) {
+    public CardCompany(String name, String code, String address) {
         this.name = name;
         this.code = code;
         this.address = address;
-        this.adminName = adminName;
+       // this.adminName = adminName;
     }
 
     public String getName() {
@@ -54,5 +54,9 @@ public class CardCompany {
         this.adminName = adminName;
     }
 
-    
+    @Override
+    public String toString() {
+        return name;
+    }    
+
 }
