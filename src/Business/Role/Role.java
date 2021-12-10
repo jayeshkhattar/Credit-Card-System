@@ -25,6 +25,7 @@ public abstract class Role {
         Customer("Customer"),
         CardCompany("CardCompany"),
         Merchant("Merchant"),
+        BankEmployee("BankEmployee"),
         SysAdmin("Sysadmin");
         
         private String value;

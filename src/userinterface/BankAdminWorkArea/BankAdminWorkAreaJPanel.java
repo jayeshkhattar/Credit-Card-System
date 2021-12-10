@@ -14,6 +14,8 @@ import Business.Bank.BankDirectory;
 import Business.Card.CardDirectory;
 import Business.CardType.CardTypeList;
 import Business.Merchant.MerchantDirectory;
+import Business.BankEmployee.BankEmployee;
+import Business.BankEmployee.BankEmployeeDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -39,6 +41,8 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
     private CardDirectory cardDirectory;
     private UserAccount account;
     private Bank bank;
+    private BankEmployee bankEmployee;
+    private BankEmployeeDirectory bankEmployeeDirectory;
     
     public BankAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem) {
         initComponents();
@@ -48,9 +52,10 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.customerDirectory = ecosystem.getCustomerDirectory();
         this.cardTypeList = ecosystem.getCardTypeList();
         this.cardDirectory = ecosystem.getCardDirectory();
+        this.bankEmployee = bankEmployee;
+        this.bankEmployeeDirectory = ecosystem.getBankEmployeeDirectory();
         
         bank = ecosystem.getBankDirectory().getBank(account.getUsername());
-        
     }
     
 
@@ -60,6 +65,8 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jSplitPane = new javax.swing.JSplitPane();
+        jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         lblSelectedNode = new javax.swing.JLabel();
@@ -68,6 +75,19 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnManageEmployees = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 88, Short.MAX_VALUE)
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 395, Short.MAX_VALUE)
+        );
+
+        jSplitPane.setLeftComponent(jPanel1);
 
         jLabel1.setText("Selected Node:");
 
@@ -111,7 +131,7 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
                             .addComponent(btnManageCreditCards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnManageCustomers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnManageEmployees, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addContainerGap(283, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,7 +149,9 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addContainerGap(189, Short.MAX_VALUE))
         );
 
-        add(jPanel2, java.awt.BorderLayout.PAGE_START);
+        jSplitPane.setRightComponent(jPanel2);
+
+        add(jSplitPane, java.awt.BorderLayout.CENTER);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnManageCustomersActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageCustomersActionPerformed
@@ -148,7 +170,7 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnManageCreditCardsActionPerformed
 
     private void btnManageEmployeesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageEmployeesActionPerformed
-       ManageMerchantJPanel mer = new ManageMerchantJPanel(userProcessContainer, ecosystem, merchantsDirectory);
+       ManageBankEmployeeJPanel mer = new ManageBankEmployeeJPanel(userProcessContainer,account, ecosystem, bankEmployeeDirectory,bank);
        userProcessContainer.add("EmployeeManagement",mer);
        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
        layout.next(userProcessContainer);
@@ -160,7 +182,9 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnManageCustomers;
     private javax.swing.JButton btnManageEmployees;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JSplitPane jSplitPane;
     private javax.swing.JLabel lblSelectedNode;
     // End of variables declaration//GEN-END:variables
 }
