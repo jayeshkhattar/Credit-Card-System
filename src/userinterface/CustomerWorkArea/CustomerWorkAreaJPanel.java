@@ -36,6 +36,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private CardDirectory cardDirectory;
     private UserAccount account;
     private ProductDirectory productDirectory;
+    private Customer customer;
     
     public CustomerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem) {
         initComponents();
@@ -45,6 +46,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         this.cardTypeList = ecosystem.getCardTypeList();
         this.cardDirectory = ecosystem.getCardDirectory();
         this.productDirectory = ecosystem.getProductDirectory();
+        customer = ecosystem.getCustomerDirectory().getCustomer(account.getUsername());
     }
     
     /**
@@ -65,18 +67,14 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
         setLayout(new java.awt.BorderLayout());
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
         jLabel1.setText("Welcome, ");
-        jPanel2.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(37, 25, -1, -1));
 
-        btnApplyCard.setText("Apply Card");
+        btnApplyCard.setText("Manage Cards");
         btnApplyCard.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnApplyCardActionPerformed(evt);
             }
         });
-        jPanel2.add(btnApplyCard, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 178, 131, -1));
 
         btnManageShopping.setText("Manage Shopping");
         btnManageShopping.addActionListener(new java.awt.event.ActionListener() {
@@ -84,24 +82,57 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 btnManageShoppingActionPerformed(evt);
             }
         });
-        jPanel2.add(btnManageShopping, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 221, -1, -1));
 
-        btnManageRedemption.setText("Redeem Points");
+        btnManageRedemption.setText("Manage Redemption");
         btnManageRedemption.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnManageRedemptionActionPerformed(evt);
             }
         });
-        jPanel2.add(btnManageRedemption, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 264, 131, -1));
 
         jLabel2.setText("<html> Total Amount Due -  <br/> Total Points - <br/> Points Redeemed -  </html>");
-        jPanel2.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(91, 59, 131, 62));
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnApplyCard, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(btnManageShopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(btnManageRedemption, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))))
+                .addContainerGap(358, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(25, 25, 25)
+                .addComponent(jLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(57, 57, 57)
+                .addComponent(btnApplyCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnManageShopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnManageRedemption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnApplyCardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApplyCardActionPerformed
-       ApplyCardJPanel applyCard = new ApplyCardJPanel(userProcessContainer, account, ecosystem, cardTypeList);
+       ApplyCardJPanel applyCard = new ApplyCardJPanel(userProcessContainer, account, ecosystem, cardTypeList, customer);
        userProcessContainer.add("BankManagement",applyCard);
        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
        layout.next(userProcessContainer);
@@ -109,14 +140,15 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnApplyCardActionPerformed
 
     private void btnManageShoppingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageShoppingActionPerformed
-       ManageShoppingJPanel manageShopping = new ManageShoppingJPanel(userProcessContainer, account, ecosystem, productDirectory);
+       ManageShoppingJPanel manageShopping = new ManageShoppingJPanel(userProcessContainer, account, ecosystem, productDirectory, customer);
        userProcessContainer.add("manageShopping",manageShopping);
        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageShoppingActionPerformed
 
     private void btnManageRedemptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRedemptionActionPerformed
-       ManageMerchantJPanel mer = new ManageMerchantJPanel(userProcessContainer, ecosystem, merchantsDirectory);
+//       ManageMerchantJPanel mer = new ManageMerchantJPanel(userProcessContainer, ecosystem, merchantsDirectory);
+       MerchantPage mer = new MerchantPage(userProcessContainer,account, ecosystem, merchantsDirectory);
        userProcessContainer.add("EmployeeManagement",mer);
        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
        layout.next(userProcessContainer);

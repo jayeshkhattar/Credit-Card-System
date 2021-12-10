@@ -5,19 +5,16 @@
  */
 package userinterface.SystemAdminWorkArea;
 
-import Business.Merchant.Merchant;
-import Business.Merchant.MerchantDirectory;
 import Business.EcoSystem;
 import Business.Employee.Employee;
+import Business.Merchant.Merchant;
+import Business.Merchant.MerchantDirectory;
+import Business.Organization;
 import Business.Role.MerchantRole;
 import Business.UserAccount.UserAccount;
-import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import java.awt.Component;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JPanel;
-
 import javax.swing.JOptionPane;
 
 /**
@@ -70,15 +67,15 @@ public class AddMerchantJPanel extends javax.swing.JPanel {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add New Merchant");
 
-        jLabel2.setText("Merchant Name :");
+        jLabel2.setText("Merchant Name*:");
 
         jLabel3.setText("Address  :");
 
-        jLabel4.setText("Manager :");
+        jLabel4.setText("Manager*:");
 
-        jLabel5.setText("Username :");
+        jLabel5.setText("Username*:");
 
-        jLabel6.setText("Password :");
+        jLabel6.setText("Password*:");
 
         pass.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -179,9 +176,9 @@ public class AddMerchantJPanel extends javax.swing.JPanel {
             .addGap(0, 490, Short.MAX_VALUE)
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 12, Short.MAX_VALUE)
+                    .addGap(0, 11, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 13, Short.MAX_VALUE)))
+                    .addGap(0, 11, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,17 +193,24 @@ public class AddMerchantJPanel extends javax.swing.JPanel {
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
         // TODO add your handling code here:
-        if(bank.getText().isEmpty() || addre.getText().isEmpty() || mgr.getText().isEmpty() ||
-            user.getText().isEmpty() || pass.getText().isEmpty() || contact.getText().isEmpty() ) {
-            JOptionPane.showMessageDialog(null, "Fields cannot be left empty");
+        if(bank.getText().isEmpty() || mgr.getText().isEmpty() ||
+            user.getText().isEmpty() || pass.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, Organization.markedFields);
             return;
         }
-
-       
+        
+        if(ecoSystem.getMerchantDirectory().getMerchantDirectory()!= null && !ecoSystem.getMerchantDirectory().getMerchantDirectory().isEmpty()){
+            for(Merchant merchant : ecoSystem.getMerchantDirectory().getMerchantDirectory()) {
+                if(merchant.getName().equals(bank.getText())) {
+                 JOptionPane.showMessageDialog(null, "Merchant Name already exists.");
+                 return;
+                }
+            }
+        }
 
         for(UserAccount account : ecoSystem.getUserAccountDirectory().getUserAccountList()) {
             if(account.getUsername().equals(user.getText())) {
-                JOptionPane.showMessageDialog(null, "Username Already exists");
+                JOptionPane.showMessageDialog(null, "Username Already exists.");
                 return;
             }
         }
@@ -215,8 +219,8 @@ public class AddMerchantJPanel extends javax.swing.JPanel {
         ecoSystem.getMerchantDirectory().newMerchant(bank.getText(),addre.getText(),mgr.getText(),contact.getText());
         Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(bank.getText());
         UserAccount usserAccount = ecoSystem.getUserAccountDirectory().createUserAccount(user.getText(), pass.getText(), employee, new MerchantRole());
-        JOptionPane.showMessageDialog(null, "Merchant Profile Created");
-
+        JOptionPane.showMessageDialog(null, "Merchant Profile Created.");
+        btnBackActionPerformed(null);
     }//GEN-LAST:event_btnaddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

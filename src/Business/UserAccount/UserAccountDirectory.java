@@ -49,4 +49,17 @@ public class UserAccountDirectory {
         }
         return true;
     }
+
+    public void removeUser(UserAccount user) {
+        userAccountList.remove(user);
+    }
+
+    public void removeUser(Employee e) {
+        for(UserAccount ua : userAccountList) {
+            if(ua.getEmployee() == e) {
+                userAccountList.remove(ua);            
+                break;
+            }
+        }
+    }
 }

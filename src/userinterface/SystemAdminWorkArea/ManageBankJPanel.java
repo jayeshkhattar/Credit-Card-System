@@ -9,6 +9,9 @@ import Business.Bank.Bank;
 import Business.Bank.BankDirectory;
 import javax.swing.JPanel;
 import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Organization;
+import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -174,12 +177,15 @@ public class ManageBankJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
          int selectedRow = tblCustomer.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         Bank bank = (Bank) tblCustomer.getValueAt(selectedRow, 0);
         bankDirectory.removeBank(bank);
+        Employee employee = ecoSystem.getEmployeeDirectory().getEmployee(bank.getName());
+        ecoSystem.getEmployeeDirectory().removeEmployee(bank.getName());
+        ecoSystem.getUserAccountDirectory().removeUser(employee);
         populateTable();
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
@@ -187,7 +193,7 @@ public class ManageBankJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = tblCustomer.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
         Bank bank = (Bank)tblCustomer.getValueAt(selectedRow,0);

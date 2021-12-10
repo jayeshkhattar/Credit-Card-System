@@ -4,6 +4,8 @@
  */
 package Business.Product;
 
+import Business.Merchant.Merchant;
+
 /**
  *
  * @author achintyasingh
@@ -14,17 +16,27 @@ public class Product {
     private String code;
     private int price;
     private String category;
-    private String productType;//Sell/Redeem
+   // private String productType;//Sell/Redeem
     private int points;
+    private Merchant merchant;
 
-    public Product(String name, String code, int price, String category, int points) {
+    public Product(String name, String code, int price, String category,  Merchant merchant) {
         this.name = name;
         this.code = code;
         this.price = price;
         this.category = category;
-        this.points = points;
+        this.merchant = merchant;
     }
 
+    public Merchant getMerchant() {
+        return merchant;
+    }
+
+    public void setMerchant(Merchant merchant) {
+        this.merchant = merchant;
+    }
+
+    
     public String getName() {
         return name;
     }
@@ -64,5 +76,10 @@ public class Product {
     public void setPoints(int points) {
         this.points = points;
     }
+    
+         @Override
+    public String toString() {
+        return name;
+    } 
     
 }

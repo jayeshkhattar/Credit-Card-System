@@ -19,9 +19,9 @@
           <EmptySpace min="0" pref="490" max="32767" attributes="0"/>
           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="0" pref="12" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
                   <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="13" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="11" max="32767" attributes="0"/>
               </Group>
           </Group>
       </Group>
@@ -142,7 +142,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Merchant Name :"/>
+            <Property name="text" type="java.lang.String" value="Merchant Name*:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -154,21 +154,21 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Manager :"/>
+            <Property name="text" type="java.lang.String" value="Manager*:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="mgr">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Username :"/>
+            <Property name="text" type="java.lang.String" value="Username*:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="user">
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Password :"/>
+            <Property name="text" type="java.lang.String" value="Password*:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="pass">

@@ -5,11 +5,15 @@
  */
 package userinterface.BankAdminWorkArea;
 
+import Business.Bank.Bank;
 import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import javax.swing.JPanel;
 import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Organization;
 import Business.UserAccount.UserAccount;
+import Business.UserAccount.UserAccountDirectory;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -27,13 +31,17 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
     private EcoSystem ecoSystem; 
     private CustomerDirectory customerDirectory;
     private UserAccount account;
+    private Bank bank;
+    private UserAccountDirectory user_dir;
 
-    public ManageCustomerJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecoSystem, CustomerDirectory customerDirectory) {
+    public ManageCustomerJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecoSystem, CustomerDirectory customerDirectory, Bank bank) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecoSystem = ecoSystem;
         this.account = account;
         this.customerDirectory = customerDirectory;
+        this.bank = bank;
+        this.user_dir = user_dir;
         populateTable();
     }
 
@@ -41,13 +49,15 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         DefaultTableModel cc = (DefaultTableModel) tblCustomer.getModel();
         cc.setRowCount(0);
         for(Customer customer : ecoSystem.getCustomerDirectory().getCustomerDirectory()){
-            Object [] row = new Object[5];
-            row[0] = customer;
-            row[1] = customer.getAddress();
-            row[2] = customer.getEmail();
-            row[3] = customer.getPhone();
-            row[4] = customer.getBankBalance();
-            cc.addRow(row);                       
+            if(customer.getBankName().equals(bank.getName())) {
+                Object [] row = new Object[5];
+                row[0] = customer;
+                row[1] = customer.getAddress();
+                row[2] = customer.getEmail();
+                row[3] = customer.getPhone();
+                row[4] = customer.getBankBalance();
+                cc.addRow(row);
+            }
         }
     }
     /**
@@ -189,7 +199,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
 
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
         // TODO add your handling code here:
-        AddCustomerJPanel addCustomer = new AddCustomerJPanel(userProcessContainer, account, ecoSystem, customerDirectory);
+        AddCustomerJPanel addCustomer = new AddCustomerJPanel(userProcessContainer, account, ecoSystem, customerDirectory, bank);
         userProcessContainer.add("AddCustomerJPanel",addCustomer);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
@@ -199,12 +209,16 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
          int selectedRow = tblCustomer.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         Customer cust = (Customer) tblCustomer.getValueAt(selectedRow, 0);
         customerDirectory.removeCustomer(cust);
+        Employee employee = ecoSystem.getEmployeeDirectory().getEmployee(cust.getUserame());
+        ecoSystem.getEmployeeDirectory().removeEmployee(cust.getUserame());
+        ecoSystem.getUserAccountDirectory().removeUser(employee);
+
         populateTable();
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
@@ -212,7 +226,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = tblCustomer.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
         Customer cust = (Customer)tblCustomer.getValueAt(selectedRow,0);

@@ -23,32 +23,62 @@
         </Constraint>
       </Constraints>
 
-      <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
-        <Property name="useNullLayout" type="boolean" value="false"/>
+      <Layout>
+        <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="37" pref="37" max="-2" attributes="0"/>
+                          <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" attributes="0">
+                          <EmptySpace min="91" pref="91" max="-2" attributes="0"/>
+                          <Component id="jLabel2" min="-2" pref="131" max="-2" attributes="0"/>
+                      </Group>
+                      <Group type="102" alignment="0" attributes="0">
+                          <EmptySpace min="91" pref="91" max="-2" attributes="0"/>
+                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                              <Component id="btnApplyCard" pref="159" max="32767" attributes="0"/>
+                              <Component id="btnManageShopping" max="32767" attributes="0"/>
+                              <Component id="btnManageRedemption" pref="159" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                  </Group>
+                  <EmptySpace pref="358" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
+                  <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="jLabel2" min="-2" pref="62" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="57" max="-2" attributes="0"/>
+                  <Component id="btnApplyCard" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="btnManageShopping" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                  <Component id="btnManageRedemption" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
       </Layout>
       <SubComponents>
         <Component class="javax.swing.JLabel" name="jLabel1">
           <Properties>
             <Property name="text" type="java.lang.String" value="Welcome, "/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="37" y="25" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnApplyCard">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Apply Card"/>
+            <Property name="text" type="java.lang.String" value="Manage Cards"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnApplyCardActionPerformed"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="91" y="178" width="131" height="-1"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnManageShopping">
           <Properties>
@@ -57,34 +87,19 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageShoppingActionPerformed"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="91" y="221" width="-1" height="-1"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JButton" name="btnManageRedemption">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Redeem Points"/>
+            <Property name="text" type="java.lang.String" value="Manage Redemption"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnManageRedemptionActionPerformed"/>
           </Events>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="91" y="264" width="131" height="-1"/>
-            </Constraint>
-          </Constraints>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
             <Property name="text" type="java.lang.String" value="&lt;html&gt; Total Amount Due -  &lt;br/&gt; Total Points - &lt;br/&gt; Points Redeemed -  &lt;/html&gt;"/>
           </Properties>
-          <Constraints>
-            <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-              <AbsoluteConstraints x="91" y="59" width="131" height="62"/>
-            </Constraint>
-          </Constraints>
         </Component>
       </SubComponents>
     </Container>

@@ -9,6 +9,7 @@ import Business.Bank.Bank;
 import Business.Bank.BankDirectory;
 import Business.EcoSystem;
 import Business.Employee.Employee;
+import Business.Organization;
 import Business.Role.BankRole;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
@@ -160,19 +161,19 @@ public class AddBankJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         if(bank.getText().isEmpty() || code.getText().isEmpty() || addre.getText().isEmpty() ||
                 user.getText().isEmpty() || pass.getText().isEmpty() ) {
-            JOptionPane.showMessageDialog(null, "Fields cannot be left empty");
+            JOptionPane.showMessageDialog(null, Organization.markedFields);
             return;
         }
         
            for(Bank bank : ecoSystem.getBankDirectory().getBankDirectory()) {
             if(bank.getCode().equals(code.getText())) {
-                JOptionPane.showMessageDialog(null, "Code already exists");
+                JOptionPane.showMessageDialog(null, "Bank Name already exists.");
             }
         }
            
            for(UserAccount account : ecoSystem.getUserAccountDirectory().getUserAccountList()) {
             if(account.getUsername().equals(user.getText())) {
-                JOptionPane.showMessageDialog(null, "Username Already exists");
+                JOptionPane.showMessageDialog(null, "Username Already exists.");
                 return;
             }
         }
@@ -181,8 +182,8 @@ public class AddBankJPanel extends javax.swing.JPanel {
         ecoSystem.getBankDirectory().newBank(bank.getText(),code.getText(),addre.getText());
         Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(bank.getText());
         UserAccount usserAccount = ecoSystem.getUserAccountDirectory().createUserAccount(user.getText(), pass.getText(), employee, new BankRole());
-        JOptionPane.showMessageDialog(null, "Bank Profile Created");
-        
+        JOptionPane.showMessageDialog(null, "Bank Profile Created.");
+        btnBackActionPerformed(null);        
     }//GEN-LAST:event_btnaddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

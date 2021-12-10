@@ -9,6 +9,7 @@ import Business.Bank.Bank;
 import Business.Bank.BankDirectory;
 import Business.EcoSystem;
 import Business.Employee.EmployeeDirectory;
+import Business.Organization;
 import Business.Role.CustomerRole;
 import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
@@ -71,11 +72,11 @@ public class UpdateBankJPanel extends javax.swing.JPanel {
 
         bankName.setEditable(false);
 
-        jLabel2.setText("Name");
+        jLabel2.setText("Name*");
 
-        jLabel3.setText("Address");
+        jLabel3.setText("Address*");
 
-        jLabel4.setText("Code");
+        jLabel4.setText("Code*");
 
         code.setEditable(false);
 
@@ -147,13 +148,14 @@ public class UpdateBankJPanel extends javax.swing.JPanel {
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
         if(addre.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Enter address ! ");
+            JOptionPane.showMessageDialog(null, Organization.markedFields);
             return;
         }
          
          bank.setMainBranchAdress(addre.getText());
 
-        JOptionPane.showMessageDialog(null, "Bank Profile Updated");
+        JOptionPane.showMessageDialog(null, "Bank Profile Updated.");
+        btnBackActionPerformed(null);
     }//GEN-LAST:event_btnUpdateActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed

@@ -8,6 +8,8 @@ package userinterface.SystemAdminWorkArea;
 import Business.Merchant.Merchant;
 import Business.Merchant.MerchantDirectory;
 import Business.EcoSystem;
+import Business.Employee.Employee;
+import Business.Organization;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -94,7 +96,7 @@ public class ManageMerchantJPanel extends javax.swing.JPanel {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("MERCHANT'S MANAGEMENT");
+        jLabel1.setText("MERCHANT MANAGEMENT");
 
         btnNew.setText("New");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
@@ -195,12 +197,15 @@ public class ManageMerchantJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
          int selectedRow = tblMerchant.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
 
         Merchant merchant = (Merchant) tblMerchant.getValueAt(selectedRow, 0);
         merchantDirectory.removeMerchant(merchant);
+        Employee employee = ecoSystem.getEmployeeDirectory().getEmployee(merchant.getName());
+        ecoSystem.getEmployeeDirectory().removeEmployee(merchant.getName());
+        ecoSystem.getUserAccountDirectory().removeUser(employee);
         populateTable();
     }//GEN-LAST:event_btnDelete1ActionPerformed
 
@@ -208,7 +213,7 @@ public class ManageMerchantJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
          int selectedRow = tblMerchant.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
         Merchant merchant = (Merchant)tblMerchant.getValueAt(selectedRow,0);

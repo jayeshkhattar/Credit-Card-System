@@ -9,6 +9,7 @@ import Business.CardType.CardType;
 import Business.CardType.CardTypeList;
 import javax.swing.JPanel;
 import Business.EcoSystem;
+import Business.Organization;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -197,7 +198,7 @@ public class ManageCardCompanyJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
          int selectedRow = tblCardCompany.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
         CardType cardComp = (CardType)tblCardCompany.getValueAt(selectedRow,0);
@@ -211,7 +212,7 @@ public class ManageCardCompanyJPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         int selectedRow = tblCardCompany.getSelectedRow();
         if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
 

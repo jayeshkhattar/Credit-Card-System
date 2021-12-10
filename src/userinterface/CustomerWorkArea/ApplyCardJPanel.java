@@ -16,7 +16,6 @@ import java.awt.Component;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
@@ -35,14 +34,15 @@ public class ApplyCardJPanel extends javax.swing.JPanel {
     private CardTypeList cardTypeList;
     private UserAccount account;
     private ArrayList<String> cardTypeLst;
+    private Customer customer;
     
-    public ApplyCardJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecoSystem, CardTypeList cardTypeList) {
+    public ApplyCardJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecoSystem, CardTypeList cardTypeList, Customer customer) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecoSystem = ecoSystem;
         this.account = account;
         this.cardTypeList = cardTypeList;
-        
+        this.customer = customer;
         fillValue();
         populateTable();
     }
@@ -51,13 +51,15 @@ public class ApplyCardJPanel extends javax.swing.JPanel {
         DefaultTableModel cc = (DefaultTableModel) tblCustomer.getModel();
         cc.setRowCount(0);
         for(Card card : ecoSystem.getCardDirectory().getCardDirectory()){
-            Object [] row = new Object[5];
-            row[0] = card;
-            row[1] = card.getCardType();
-            row[2] = card.getCreditLimit();
-            row[3] = card.getStatus();
-            row[4] = card.getCardNumber();
-            cc.addRow(row);                       
+            if(card.getCardOwner() == customer) {
+                Object [] row = new Object[5];
+                row[0] = card;
+                row[1] = card.getCardType();
+                row[2] = card.getCreditLimit();
+                row[3] = card.getStatus();
+                row[4] = card.getCardNumber();
+                cc.addRow(row);
+            }
         }
     }
      
@@ -152,24 +154,24 @@ public class ApplyCardJPanel extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
-       if(comboCardType.getSelectedItem().toString() == "Select") {
+       if(comboCardType.getSelectedItem().toString().equals("Select")) {
             JOptionPane.showMessageDialog(null, "Please select from available options.");
             return;
         }
-
-/*       for(Card card : ecoSystem.getCardDirectory().getCardDirectory()) {
-            if(card.getCode().equals(code.getText())) {
-                JOptionPane.showMessageDialog(null, "Code already exists");
-            }
-        }
-*/           
-        System.out.println(account);
         int index = comboCardType.getSelectedIndex() - 1;
         CardType ct = ecoSystem.getCardTypeList().getCardTypeList().get(index);
+       
+        for(Card card : ecoSystem.getCardDirectory().getCardDirectory()) {
+            if(card.getCardOwner() == customer && card.getCardType() == ct) {
+                JOptionPane.showMessageDialog(null, "Card exists. Please wait for admin to approve the request if it is Pending.");
+                return;
+            }
+        }
+
+        System.out.println(account);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");  
         LocalDateTime now = LocalDateTime.now();
-        Customer customer = ecoSystem.getCustomerDirectory().getCustomer(account.getUsername());
-        ecoSystem.getCardDirectory().newCard( "", dtf.format(now), "", "", 0, 0, 0, 0, ct, customer, "New Application");
+        ecoSystem.getCardDirectory().newCard( "", dtf.format(now), "", "", 0, 0, 0, 0, ct, customer, Card.statusNew);
         JOptionPane.showMessageDialog(null, "Card Applied");
         cardDetails.setText("");
         fillValue();

@@ -25,7 +25,7 @@ public class Customer {
     private String bankName;
     private ArrayList<Shopping> shoppingList;
 
-    public Customer(String name, String email, String phone, int age, long ssn, String address, String userame, String bankName) {
+    public Customer(String name, String email, String phone, int age, long ssn, String address, String userame, String bankName, Long bankBalance) {
         this.name = name;
         this.email = email;
         this.phone = phone;
@@ -34,6 +34,7 @@ public class Customer {
         this.address = address;
         this.userame = userame;
         this.bankName = bankName;
+        this.bankBalance = bankBalance;
         
     }
 

@@ -5,10 +5,12 @@
  */
 package userinterface.BankAdminWorkArea;
 
+import Business.Bank.Bank;
 import Business.Card.Card;
 import Business.Card.CardDirectory;
 import javax.swing.JPanel;
 import Business.EcoSystem;
+import Business.Organization;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import javax.swing.JOptionPane;
@@ -28,13 +30,15 @@ public class ManageCreditCardsJPanel extends javax.swing.JPanel {
     private EcoSystem ecoSystem; 
     private CardDirectory cardDirectory;
     private UserAccount account;
+    private Bank bank;
     
-    public ManageCreditCardsJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecoSystem, CardDirectory cardDirectory) {
+    public ManageCreditCardsJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecoSystem, CardDirectory cardDirectory, Bank bank) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.account= account;
         this.ecoSystem = ecoSystem;
         this.cardDirectory = cardDirectory;
+        this.bank = bank;
         populateTable();
     }
     
@@ -42,14 +46,16 @@ public class ManageCreditCardsJPanel extends javax.swing.JPanel {
         DefaultTableModel dtm = (DefaultTableModel) tblCreditCard.getModel();
         dtm.setRowCount(0);
         for(Card card : ecoSystem.getCardDirectory().getCardDirectory()) {
-            Object [] row = new Object[6];
-            row[0] = card;
-            row[1] = card.getCardOwner().getName();
-            row[2] = card.getCardNumber();
-            row[3] = card.getStatus();
-            row[4] = card.getCardType().getCardPlatinumType();
-            row[5] = card.getCreditLimit();
-            dtm.addRow(row);
+            if(card.getCardOwner().getBankName().equals(bank.getName())) {
+                Object [] row = new Object[6];
+                row[0] = card;
+                row[1] = card.getCardOwner().getName();
+                row[2] = card.getCardNumber();
+                row[3] = card.getStatus();
+                row[4] = card.getCardType().getCardPlatinumType();
+                row[5] = card.getCreditLimit();
+                dtm.addRow(row);                
+            }
         }
         }
 
@@ -171,11 +177,15 @@ public class ManageCreditCardsJPanel extends javax.swing.JPanel {
 
     private void btnApproveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnApproveActionPerformed
         int index = tblCreditCard.getSelectedRow();
+        if(index < 0) {
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
         int cnt = 0;
         for(Card card : ecoSystem.getCardDirectory().getCardDirectory()) {
             if(cnt == index) {
-                if(card.getStatus().equals("New Application")) {
-                    card.setStatus("Active");
+                if(card.getStatus().equals(Card.statusNew)) {
+                    card.setStatus(Card.statusActive);
                     long first16 = (long) (Math.random() * 10000000000000000L);
                     card.setCardNumber(String.valueOf(first16));
 //                    card.setExpiryDate();
@@ -187,6 +197,12 @@ public class ManageCreditCardsJPanel extends javax.swing.JPanel {
                     card.setTotalPointsEarned(0);
                     card.setPointsRemaining(0);
                 }
+                else if(card.getStatus().equals(Card.statusActive))
+                    JOptionPane.showMessageDialog(null,"The card is already active.", "Warining", JOptionPane.WARNING_MESSAGE);            
+                else if(card.getStatus().equals(Card.statusRejected))
+                    JOptionPane.showMessageDialog(null,"This application was rejected. Please select another card.", "Warining", JOptionPane.WARNING_MESSAGE);            
+                else if(card.getStatus().equals(Card.statusDisabled))
+                    JOptionPane.showMessageDialog(null,"This card is disabled. Please select another card.", "Warining", JOptionPane.WARNING_MESSAGE);
             }
             cnt++;
         }
@@ -195,19 +211,51 @@ public class ManageCreditCardsJPanel extends javax.swing.JPanel {
 
     private void btnDisableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDisableActionPerformed
         // TODO add your handling code here:
-         int selectedRow = tblCreditCard.getSelectedRow();
-        if(selectedRow < 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+        int index = tblCreditCard.getSelectedRow();
+        if(index < 0) {
+            JOptionPane.showMessageDialog(null,Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        Card card = (Card) tblCreditCard.getValueAt(selectedRow, 0);
-        cardDirectory.removeCard(card);
+        int cnt = 0;
+        for(Card card : ecoSystem.getCardDirectory().getCardDirectory()) {
+            if(cnt == index) {
+                if(card.getStatus().equals(Card.statusNew)) {
+                    JOptionPane.showMessageDialog(null,"This is not allowed.", "Warining", JOptionPane.WARNING_MESSAGE);            
+                }
+                else if(card.getStatus().equals(Card.statusActive))
+                    card.setStatus(Card.statusDisabled);
+                else if(card.getStatus().equals(Card.statusRejected))
+                    JOptionPane.showMessageDialog(null,"This application is  rejected. Please select another card.", "Warining", JOptionPane.WARNING_MESSAGE);            
+                else if(card.getStatus().equals(Card.statusDisabled))
+                    JOptionPane.showMessageDialog(null,"This card is already disabled.", "Warining", JOptionPane.WARNING_MESSAGE);
+            }
+            cnt++;
+        }
         populateTable();
     }//GEN-LAST:event_btnDisableActionPerformed
 
     private void btnRejectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRejectActionPerformed
-        // TODO add your handling code here:
+        int index = tblCreditCard.getSelectedRow();
+        if(index < 0) {
+            JOptionPane.showMessageDialog(null, Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        int cnt = 0;
+        for(Card card : ecoSystem.getCardDirectory().getCardDirectory()) {
+            if(cnt == index) {
+                if(card.getStatus().equals(Card.statusNew)) {
+                    card.setStatus(Card.statusRejected);
+                }
+                else if(card.getStatus().equals(Card.statusActive))
+                    JOptionPane.showMessageDialog(null,"This card is already active. Please disable or select another card.", "Warining", JOptionPane.WARNING_MESSAGE);            
+                else if(card.getStatus().equals(Card.statusRejected))
+                    JOptionPane.showMessageDialog(null,"This application is already rejected.", "Warining", JOptionPane.WARNING_MESSAGE);            
+                else if(card.getStatus().equals(Card.statusDisabled))
+                    JOptionPane.showMessageDialog(null,"This card is disabled. Please select another card.", "Warining", JOptionPane.WARNING_MESSAGE);
+            }
+            cnt++;
+        }
+        populateTable();
     }//GEN-LAST:event_btnRejectActionPerformed
 
 

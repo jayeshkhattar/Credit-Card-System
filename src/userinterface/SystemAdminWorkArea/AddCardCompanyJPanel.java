@@ -9,8 +9,7 @@ import Business.CardType.CardType;
 import Business.CardType.CardTypeList;
 import Business.EcoSystem;
 import Business.Employee.Employee;
-import Business.Role.CardCompanyRole;
-import Business.UserAccount.UserAccount;
+import Business.Organization;
 import java.awt.CardLayout;
 import java.awt.Component;
 import javax.swing.JOptionPane;
@@ -33,6 +32,8 @@ public class AddCardCompanyJPanel extends javax.swing.JPanel {
         this.userProcessContainer = userProcessContainer;
         this.ecoSystem = ecoSystem;
         this.cardTypeList = ecoSystem.getCardTypeList();
+        txtPoint.setEditable(false);
+        txtLimit.setEditable(false);
     }
 
     /**
@@ -55,21 +56,21 @@ public class AddCardCompanyJPanel extends javax.swing.JPanel {
         btnadd = new javax.swing.JButton();
         btnBack = new javax.swing.JButton();
         combo = new javax.swing.JComboBox<>();
-        points = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        limit = new javax.swing.JLabel();
+        txtPoint = new javax.swing.JTextField();
+        txtLimit = new javax.swing.JTextField();
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Add New Card Type");
 
-        jLabel2.setText("Card Company Name :");
+        jLabel2.setText("Card Type*:");
 
-        jLabel3.setText("Code :");
+        jLabel3.setText("Code*:");
 
-        jLabel5.setText("Card Type");
+        jLabel5.setText("Card Type*:");
 
-        jLabel6.setText("Points % :");
+        jLabel6.setText("Points %*:");
 
         btnadd.setText("Add");
         btnadd.addActionListener(new java.awt.event.ActionListener() {
@@ -92,11 +93,7 @@ public class AddCardCompanyJPanel extends javax.swing.JPanel {
             }
         });
 
-        points.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-
-        jLabel8.setText("Card Limit:");
-
-        limit.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel8.setText("Card Limit*:");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -119,13 +116,18 @@ public class AddCardCompanyJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel8))
                 .addGap(52, 52, 52)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(limit)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(combo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(code, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE)
                         .addComponent(card, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))
-                    .addComponent(points))
-                .addContainerGap(105, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txtLimit, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
+                                .addGap(4, 4, 4))
+                            .addComponent(txtPoint, javax.swing.GroupLayout.DEFAULT_SIZE, 134, Short.MAX_VALUE))))
+                .addContainerGap(101, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnadd)
@@ -153,15 +155,15 @@ public class AddCardCompanyJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(28, 28, 28)
+                .addGap(25, 25, 25)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
-                    .addComponent(points))
-                .addGap(35, 35, 35)
+                    .addComponent(txtPoint, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(29, 29, 29)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(limit))
-                .addGap(30, 30, 30)
+                    .addComponent(txtLimit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addComponent(btnadd)
                 .addContainerGap(68, Short.MAX_VALUE))
         );
@@ -190,29 +192,26 @@ public class AddCardCompanyJPanel extends javax.swing.JPanel {
 
     private void btnaddActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaddActionPerformed
         // TODO add your handling code here:
-        if(card.getText().isEmpty() || code.getText().isEmpty()) {
-            JOptionPane.showMessageDialog(null, "Fields cannot be left empty");
+        if(card.getText().isEmpty() || code.getText().isEmpty() || txtPoint.getText().isEmpty() ||
+                txtLimit.getText().isEmpty()) {
+            JOptionPane.showMessageDialog(null, Organization.markedFields);
             return;
         }
-        if(ecoSystem.getCardTypeList().getCardTypeList() != null && ecoSystem.getCardTypeList().getCardTypeList().size() != 0){
+        if(ecoSystem.getCardTypeList().getCardTypeList() != null && !ecoSystem.getCardTypeList().getCardTypeList().isEmpty()){
             for(CardType cardCompany : ecoSystem.getCardTypeList().getCardTypeList()) {
                 if(cardCompany.getCode().equals(code.getText())) {
-                 JOptionPane.showMessageDialog(null, "Code already exists");
+                    JOptionPane.showMessageDialog(null, "Card Code already exists.");
+                    return;
                 }
             }
         }
-    /*    for(UserAccount account : ecoSystem.getUserAccountDirectory().getUserAccountList()) {
-            if(account.getUsername().equals(user.getText())) {
-                JOptionPane.showMessageDialog(null, "Username Already exists");
-                return;
-            }
-        }
-       */    
+
         System.out.println(ecoSystem.toString());
-        ecoSystem.getCardTypeList().newCardCompany(card.getText(),code.getText(),combo.getSelectedItem().toString(),Integer.parseInt(points.getText()),Integer.parseInt(limit.getText()));
+        ecoSystem.getCardTypeList().newCardCompany(card.getText(),code.getText(),combo.getSelectedItem().toString(),Integer.parseInt(txtPoint.getText()),Integer.parseInt(txtLimit.getText()));
         Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(card.getText());
     //    UserAccount usserAccount = ecoSystem.getUserAccountDirectory().createUserAccount(user.getText(), pass.getText(), employee, new CardCompanyRole());
-        JOptionPane.showMessageDialog(null, "Card Company Profile Created");
+        JOptionPane.showMessageDialog(null, "Card Type Created.");
+        btnBackActionPerformed(null);
     }//GEN-LAST:event_btnaddActionPerformed
 
     private void btnBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBackActionPerformed
@@ -229,17 +228,29 @@ public class AddCardCompanyJPanel extends javax.swing.JPanel {
     private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
         // TODO add your handling code here:
         String str = combo.getSelectedItem().toString();
-        if(str.equals("Platinum")){
-            points.setText("20");
-            limit.setText("300000");
+        if(str.equals("Select")) {
+            txtPoint.setEditable(false);
+            txtLimit.setEditable(false);
+            txtPoint.setText("");
+            txtLimit.setText("");
+        }
+        else if(str.equals("Platinum")){
+            txtPoint.setEditable(true);
+            txtLimit.setEditable(true);
+            txtPoint.setText("20");
+            txtLimit.setText("300000");
         }
         else if(str.equals("Gold")){
-            points.setText("10");
-            limit.setText("200000");
+            txtPoint.setEditable(true);
+            txtLimit.setEditable(true);
+            txtPoint.setText("10");
+            txtLimit.setText("200000");
         }
         else if(str.equals("Silver")){
-            points.setText("5");
-            limit.setText("100000");
+            txtPoint.setEditable(true);
+            txtLimit.setEditable(true);
+            txtPoint.setText("5");
+            txtLimit.setText("100000");
         }
     }//GEN-LAST:event_comboActionPerformed
 
@@ -257,7 +268,7 @@ public class AddCardCompanyJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel limit;
-    private javax.swing.JLabel points;
+    private javax.swing.JTextField txtLimit;
+    private javax.swing.JTextField txtPoint;
     // End of variables declaration//GEN-END:variables
 }

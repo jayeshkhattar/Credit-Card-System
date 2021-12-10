@@ -5,15 +5,15 @@
  */
 package userinterface.MerchantWorkArea;
 
-import userinterface.SystemAdminWorkArea.*;
-import Business.Bank.Bank;
-import Business.Bank.BankDirectory;
 import javax.swing.JPanel;
 import Business.EcoSystem;
+import Business.Merchant.Merchant;
+import Business.Organization;
 import Business.Product.Product;
 import Business.Product.ProductDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
+import java.awt.Component;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -31,37 +31,32 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
     private EcoSystem ecoSystem; 
     private ProductDirectory productDirectory;
     private UserAccount account;
-    public ManageProductsJPanel(JPanel userProcessContainer,  UserAccount account, EcoSystem ecoSystem, ProductDirectory productDirectory) {
+    private Merchant merchant;
+    public ManageProductsJPanel(JPanel userProcessContainer,  UserAccount account, EcoSystem ecoSystem, ProductDirectory productDirectory,Merchant merchant) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
         this.ecoSystem = ecoSystem;
         this.account = account;
         this.productDirectory = productDirectory;
+        this.merchant = merchant;
         
         populateTable();
     }
     
         public void populateTable() {
-        DefaultTableModel dtm = (DefaultTableModel) tblCustomer.getModel();
+               DefaultTableModel dtm = (DefaultTableModel) tblCustomer.getModel();
         dtm.setRowCount(0);
-        for(Product product : ecoSystem.getProductDirectory().getProductDirectory()){
-            if(comboProductType.getSelectedItem().toString().equals("Shop")){
-            Object [] row = new Object[3];
-            row[0] = product;
-            row[1] = product.getCategory();
-            row[2] = product.getName();
-            dtm.addRow(row);
+        for(Product product : ecoSystem.getProductDirectory().getProductDirectory()){            
+            if(merchant == product.getMerchant()){
+                Object [] row = new Object[4];
+                row[0] = product;
+                row[1] = product.getCode();
+                row[2] = product.getCategory();
+                row[3] = product.getPrice();
+                dtm.addRow(row);
+            }
         }
-            else if(comboProductType.getSelectedItem().toString().equals("Redeem")){
-            Object [] row = new Object[3];
-            row[0] = product;
-            row[1] = product.getCategory();
-            row[2] = product.getName();
-            dtm.addRow(row);
-        }
-        }
-        }
-
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -81,28 +76,28 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
         btnDelete3 = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        combProductCatgory2 = new javax.swing.JComboBox<>();
-        txtName1 = new javax.swing.JTextField();
+        combo = new javax.swing.JComboBox<>();
+        product1 = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        txtPrice1 = new javax.swing.JTextField();
+        price = new javax.swing.JTextField();
         btnDelete4 = new javax.swing.JButton();
         jLabel10 = new javax.swing.JLabel();
-        comboProductType = new javax.swing.JComboBox<>();
+        code = new javax.swing.JTextField();
 
         tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Product Name", "Code", "Address"
+                "Product Name", "Code", "Category", "Price"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -123,6 +118,11 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
         jLabel6.setText("MANAGE PRODUCTS");
 
         btnUpdate1.setText("Update");
+        btnUpdate1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnUpdate1ActionPerformed(evt);
+            }
+        });
 
         btnDelete3.setText("Delete");
         btnDelete3.addActionListener(new java.awt.event.ActionListener() {
@@ -131,28 +131,28 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel7.setText("Category");
+        jLabel7.setText("Category*");
 
-        combProductCatgory2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Electronics", "Clothing", "Food", "Home Decor", "Baby Products", "Beauty and Health" }));
-        combProductCatgory2.addActionListener(new java.awt.event.ActionListener() {
+        combo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Electronics", "Clothing", "Food", "Home Decor", "Baby Products", "Beauty and Health" }));
+        combo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combProductCatgory2ActionPerformed(evt);
+                comboActionPerformed(evt);
             }
         });
 
-        txtName1.addActionListener(new java.awt.event.ActionListener() {
+        product1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtName1ActionPerformed(evt);
+                product1ActionPerformed(evt);
             }
         });
 
-        jLabel8.setText("Product Name");
+        jLabel8.setText("Product Name*");
 
-        jLabel9.setText("Price/Points to Redeem");
+        jLabel9.setText("Price*");
 
-        txtPrice1.addActionListener(new java.awt.event.ActionListener() {
+        price.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtPrice1ActionPerformed(evt);
+                priceActionPerformed(evt);
             }
         });
 
@@ -163,14 +163,7 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel10.setText("Product Type");
-
-        comboProductType.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Shop", "Redeem" }));
-        comboProductType.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                comboProductTypeActionPerformed(evt);
-            }
-        });
+        jLabel10.setText("Code*");
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -183,24 +176,20 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combProductCatgory2, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(product1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
-                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(36, 36, 36))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addComponent(jLabel10)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel10)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(comboProductType, 0, 144, Short.MAX_VALUE)
-                    .addComponent(txtPrice1)))
+                    .addComponent(price)
+                    .addComponent(code, javax.swing.GroupLayout.DEFAULT_SIZE, 144, Short.MAX_VALUE)))
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(179, 179, 179)
                 .addComponent(btnDelete4)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 262, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -208,15 +197,15 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(combProductCatgory2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel10)
-                    .addComponent(comboProductType, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(code, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(txtName1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(product1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(txtPrice1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(btnDelete4)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -234,15 +223,14 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
                         .addComponent(jButton2))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(btnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnDelete3))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(62, 62, 62)
-                        .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addComponent(btnUpdate1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(btnDelete3))
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 567, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGap(59, 526, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -281,39 +269,75 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        userProcessContainer.remove(this);
+        Component[] componentArray = userProcessContainer.getComponents();
+        Component component = componentArray[componentArray.length - 1];
+        MerchantWorkAreaJPanel mpsjp = (MerchantWorkAreaJPanel) component;
+       // mpsjp.populateTable();
+        CardLayout layout = (CardLayout) userProcessContainer.getLayout();
+        layout.previous(userProcessContainer);
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void btnDelete3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete3ActionPerformed
         // TODO add your handling code here:
+        int selectedRow = tblCustomer.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        Product product = (Product) tblCustomer.getValueAt(selectedRow, 0);
+        productDirectory.removeProduct(product);
+        populateTable();
     }//GEN-LAST:event_btnDelete3ActionPerformed
 
-    private void txtName1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtName1ActionPerformed
+    private void product1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_product1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtName1ActionPerformed
+    }//GEN-LAST:event_product1ActionPerformed
 
-    private void txtPrice1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPrice1ActionPerformed
+    private void priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_priceActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtPrice1ActionPerformed
+    }//GEN-LAST:event_priceActionPerformed
 
     private void btnDelete4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete4ActionPerformed
         // TODO add your handling code here:
+          if(code.getText().isEmpty() || price.getText().isEmpty() || product1.getText().isEmpty() ) {
+            JOptionPane.showMessageDialog(null, Organization.markedFields);
+            return;
+        }
+        
+        System.out.println(ecoSystem.toString());
+        ecoSystem.getProductDirectory().newProduct(product1.getText(),code.getText(),Integer.parseInt(price.getText()),combo.getSelectedItem().toString(),merchant);
+        
+        JOptionPane.showMessageDialog(null, "Product Added");
+        populateTable();
     }//GEN-LAST:event_btnDelete4ActionPerformed
 
-    private void comboProductTypeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboProductTypeActionPerformed
+    private void comboActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_comboProductTypeActionPerformed
+    }//GEN-LAST:event_comboActionPerformed
 
-    private void combProductCatgory2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combProductCatgory2ActionPerformed
+    private void btnUpdate1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdate1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_combProductCatgory2ActionPerformed
+        int selectedRow = tblCustomer.getSelectedRow();
+        if(selectedRow < 0) {
+            JOptionPane.showMessageDialog(null, Organization.selectRow, "Warining", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        Product product = (Product)tblCustomer.getValueAt(selectedRow,0);
+        UpdateProductJPanel modifyProduct = new UpdateProductJPanel(userProcessContainer, ecoSystem, productDirectory, product);
+        userProcessContainer.add("ModifyProductPanel",modifyProduct);
+        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+        layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnUpdate1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnDelete3;
     private javax.swing.JButton btnDelete4;
     private javax.swing.JButton btnUpdate1;
-    private javax.swing.JComboBox<String> combProductCatgory2;
-    private javax.swing.JComboBox<String> comboProductType;
+    private javax.swing.JTextField code;
+    private javax.swing.JComboBox<String> combo;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel6;
@@ -323,9 +347,9 @@ public class ManageProductsJPanel extends javax.swing.JPanel {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField price;
+    private javax.swing.JTextField product1;
     private javax.swing.JTable tblCustomer;
-    private javax.swing.JTextField txtName1;
-    private javax.swing.JTextField txtPrice1;
     // End of variables declaration//GEN-END:variables
 
   

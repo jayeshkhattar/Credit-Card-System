@@ -177,7 +177,8 @@ public class UpdateMerchantJPanel extends javax.swing.JPanel {
         merchant.setPhoneNumber(contactNum.getText());
         merchant.setManagerName(manager.getText());
         
-        JOptionPane.showMessageDialog(null, "Merchant Profile Updated");
+        JOptionPane.showMessageDialog(null, "Merchant Profile Updated.");
+        btnBackActionPerformed(null);
         }
     }//GEN-LAST:event_btnUpdateActionPerformed
 

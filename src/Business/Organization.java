@@ -23,6 +23,9 @@ public abstract class Organization {
     private int organizationID;
     private static int counter=0;
     
+    public static final String markedFields = "Marked fields cannot be empty.";
+    public static final String selectRow = "Please Select a row from table first.";
+    
     public enum Type{
         RestaurantAdmin("RestaurantAdmin"),
         Customer("Customer"),

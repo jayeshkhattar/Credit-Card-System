@@ -35,4 +35,13 @@ public class BankDirectory {
     public void removeBank(Bank bank) {
         bankDirectory.remove(bank);
     }
+    
+    public Bank getBank(String username) {
+        for(Bank b : bankDirectory) {
+            if(b.getName().equals(username)) {
+                return b;
+            }
+        }
+        return null;
+    }
 }

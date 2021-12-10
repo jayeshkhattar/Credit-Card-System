@@ -25,6 +25,13 @@ public class Card {
     private CardType cardType;
     private Customer cardOwner;
     private String status;
+    private String reason;
+    
+    public static final String statusNew = "New Application. Pending Approval";
+    public static final String statusActive = "Active";
+    public static final String statusRejected = "Rejected";
+    public static final String statusDisabled = "Disabled";
+    
 
     public Card(String cardNumber, String expiryDate, String cardHolderName, String cvv, int creditLimit, int expenditure, int totalPointsEarned, int pointsRemaining, CardType cardType, Customer cardOwner, String status) {
         this.cardNumber = cardNumber;

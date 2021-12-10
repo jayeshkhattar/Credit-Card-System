@@ -9,6 +9,7 @@ import Business.Customer.Customer;
 import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
 import Business.Employee.EmployeeDirectory;
+import Business.Organization;
 import Business.Role.MerchantRole;
 import Business.UserAccount.UserAccount;
 import Business.UserAccount.UserAccountDirectory;
@@ -184,7 +185,7 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
         customer.setPhone(contact.getText());
         customer.setEmail(emailId.getText());
         
-        JOptionPane.showMessageDialog(null, "Merchant Profile Updated");
+        JOptionPane.showMessageDialog(null, "Customer Profile Updated.");
         }
     }//GEN-LAST:event_UpdateActionPerformed
  public int validateInput(){
@@ -194,17 +195,17 @@ public class UpdateCustomerJPanel extends javax.swing.JPanel {
         
         if(addres.getText().isEmpty() || contact.getText().isEmpty() || emailId.getText().isEmpty()) {
             flag = 1;
-            JOptionPane.showMessageDialog(null, "Fields cannot be empty ! ");
+            JOptionPane.showMessageDialog(null, Organization.markedFields);
             
         }
         if((!(Pattern.matches("(0/91)?[7-9][0-9]{9}",contact.getText())))){
             flag = 1;
-            JOptionPane.showMessageDialog(null,"Please enter a valid contact number", "Error", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Please enter a valid phone number.", "Error", JOptionPane.ERROR_MESSAGE);
         }
         
          if ((!(Pattern.matches("^[a-zA-Z0-9]+[@]{1}+[a-zA-Z0-9]+[.]{1}+[a-zA-Z0-9]+$", emailId.getText())))) {
               flag = 1;
-              JOptionPane.showMessageDialog(null, "Please enter a valid email", "Error", JOptionPane.ERROR_MESSAGE);
+              JOptionPane.showMessageDialog(null, "Please enter a valid email address.", "Error", JOptionPane.ERROR_MESSAGE);
             }
         return flag;
     }

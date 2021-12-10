@@ -36,5 +36,15 @@ public class MerchantDirectory {
     
     public void removeMerchant(Merchant mer) {
         merchantDirectory.remove(mer);
+        
+    }
+    
+    public Merchant getMerchant(String name){
+        for(Merchant merchant: merchantDirectory){
+            if(merchant.getName().equalsIgnoreCase(name)){
+                return merchant;
+            }
+        }
+        return null;
     }
 }

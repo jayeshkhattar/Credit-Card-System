@@ -4,6 +4,7 @@
  */
 package Business.Product;
 
+import Business.Merchant.Merchant;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,8 +28,8 @@ public class ProductDirectory {
         this.productDirectory = productList;
     }
     
-    public Product newProduct(String name, String code, int price, String category, int points) {
-        Product pr = new Product(name, code, price, category, points);
+    public Product newProduct(String name, String code, int price, String category, Merchant merchant) {
+        Product pr = new Product(name, code, price, category,merchant);
         productDirectory.add(pr);
         return pr;
     }

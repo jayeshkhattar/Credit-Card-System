@@ -13,7 +13,6 @@ public class Bank {
     private String name;
     private String code;
     private String mainBranchAdress;
-    private String adminName;
 
     public Bank(String name, String code, String mainBranchAdress) {
         this.name = name;
@@ -43,13 +42,6 @@ public class Bank {
 
     public void setMainBranchAdress(String mainBranchAdress) {
         this.mainBranchAdress = mainBranchAdress;
-    }
-    public String getAdminName() {
-        return adminName;
-    }
-
-    public void setBankAdminName(String adminName) {
-        this.adminName = adminName;
     }
   
     @Override
