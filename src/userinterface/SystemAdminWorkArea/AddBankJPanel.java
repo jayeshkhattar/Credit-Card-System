@@ -179,7 +179,7 @@ public class AddBankJPanel extends javax.swing.JPanel {
         }
            
         System.out.println(ecoSystem.toString());
-        ecoSystem.getBankDirectory().newBank(bank.getText(),code.getText(),addre.getText());
+        ecoSystem.getBankDirectory().newBank(bank.getText(),code.getText(),addre.getText(), user.getText());
         Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(bank.getText());
         UserAccount usserAccount = ecoSystem.getUserAccountDirectory().createUserAccount(user.getText(), pass.getText(), employee, new BankRole());
         JOptionPane.showMessageDialog(null, "Bank Profile Created.");

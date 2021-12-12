@@ -20,11 +20,12 @@ public class BankEmployee {
     private String phoneNumber;
     private Bank bank;
 
-    public BankEmployee(String name, String address, String code, String phoneNumber) {//, ProductDirectory productDirectory
+    public BankEmployee(String name, String address, String code, String phoneNumber, Bank bank) {//, ProductDirectory productDirectory
         this.name = name;
         this.address = address;
         this.code = code;
         this.phoneNumber = phoneNumber;
+        this.bank = bank;
         //this.productDirectory = productDirectory;
     }
 

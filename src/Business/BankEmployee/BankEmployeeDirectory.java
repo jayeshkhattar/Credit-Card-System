@@ -5,6 +5,7 @@
  */
 package Business.BankEmployee;
 
+import Business.Bank.Bank;
 import java.util.ArrayList;
 
 /**
@@ -26,8 +27,8 @@ public class BankEmployeeDirectory {
         this.bankEmployeeDirectory = bankEmployeeDirectory;
     }
     
-    public BankEmployee newBankEmployee(String name, String address, String code, String phoneNumber) { //, ProductDirectory productDirectory
-        BankEmployee be = new BankEmployee(name, address, code, phoneNumber);//, productDirectory
+    public BankEmployee newBankEmployee(String name, String address, String code, String phoneNumber, Bank bank) {
+        BankEmployee be = new BankEmployee(name, address, code, phoneNumber, bank);
         bankEmployeeDirectory.add(be);
         return be;
     }

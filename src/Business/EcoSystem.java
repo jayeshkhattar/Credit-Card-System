@@ -17,6 +17,7 @@ import Business.Merchant.MerchantDirectory;
 import Business.Product.ProductDirectory;
 import Business.Voucher.VoucherList;
 import Business.BankEmployee.BankEmployeeDirectory;
+import Business.Order.OrderHistory;
 
 
 /**
@@ -33,7 +34,8 @@ public class EcoSystem extends Organization{
     private ProductDirectory productDirectory;
     private CardDirectory cardDirectory;
     private VoucherList voucherList;
-    private BankEmployeeDirectory bankEmployeeDirectory;;
+    private BankEmployeeDirectory bankEmployeeDirectory;
+    private OrderHistory orderHistory;
     
 
     public EcoSystem() {
@@ -46,6 +48,7 @@ public class EcoSystem extends Organization{
         productDirectory = new ProductDirectory();
         voucherList = new VoucherList();
         bankEmployeeDirectory = new BankEmployeeDirectory();
+        orderHistory = new OrderHistory();
     }
 
     public CustomerDirectory getCustomerDirectory() {
@@ -120,6 +123,15 @@ public class EcoSystem extends Organization{
     public void setBankEmployeeDirectory(BankEmployeeDirectory bankEmployeeDirectory) {
         this.bankEmployeeDirectory = bankEmployeeDirectory;
     }
+
+    public OrderHistory getOrderHistory() {
+        return orderHistory;
+    }
+
+    public void setOrderHistory(OrderHistory orderHistory) {
+        this.orderHistory = orderHistory;
+    }
+    
     
     @Override
     public ArrayList<Role> getSupportedRole() {

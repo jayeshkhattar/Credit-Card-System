@@ -45,14 +45,12 @@ public class ManageBankEmployeeJPanel extends javax.swing.JPanel {
         
         populateTable();
     }
-public void populateTable() {
-               DefaultTableModel dtm = (DefaultTableModel) tblCustomer.getModel();
+    public void populateTable() {
+        DefaultTableModel dtm = (DefaultTableModel) tblCustomer.getModel();
         dtm.setRowCount(0);
-        for(BankEmployee be : ecoSystem.getBankEmployeeDirectory().getBankEmployeeDirectory()){
-            
+        for(BankEmployee be : ecoSystem.getBankEmployeeDirectory().getBankEmployeeDirectory()){    
             if(bank == be.getBank()){
             Object [] row = new Object[4];
-            
             row[0] = be;
             row[1] = be.getCode();
             row[2] = be.getAddress();
@@ -339,11 +337,10 @@ public void populateTable() {
         }
 
         System.out.println(ecoSystem.toString());
-        ecoSystem.getBankEmployeeDirectory().newBankEmployee(name.getText(),addre.getText(),code.getText(),contact.getText());
-
+        ecoSystem.getBankEmployeeDirectory().newBankEmployee(name.getText(),addre.getText(),code.getText(),contact.getText(), bank);
         Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(name.getText());
         UserAccount usserAccount = ecoSystem.getUserAccountDirectory().createUserAccount(user.getText(), pass.getText(), employee, new BankEmployeeRole());
-        JOptionPane.showMessageDialog(null, "Bank Employee Profile Created");
+        JOptionPane.showMessageDialog(null, "Bank Employee Profile Created.");
         populateTable();
     }//GEN-LAST:event_btnDelete4ActionPerformed
 

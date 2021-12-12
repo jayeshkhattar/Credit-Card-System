@@ -5,9 +5,7 @@
  */
 package userinterface.CustomerWorkArea;
 
-import userinterface.SystemAdminWorkArea.*;
 import Business.Customer.Customer;
-import Business.Customer.CustomerDirectory;
 import Business.EcoSystem;
 import Business.Card.CardDirectory;
 import Business.CardType.CardTypeList;
@@ -17,8 +15,6 @@ import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
 import javax.swing.JPanel;
-import javax.swing.tree.DefaultMutableTreeNode;
-import javax.swing.tree.DefaultTreeModel;
 
 /**
  *
@@ -47,6 +43,12 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         this.cardDirectory = ecosystem.getCardDirectory();
         this.productDirectory = ecosystem.getProductDirectory();
         customer = ecosystem.getCustomerDirectory().getCustomer(account.getUsername());
+        setText();
+    }
+    
+    public void setText() {
+        customer = ecosystem.getCustomerDirectory().getCustomer(account.getUsername());        
+        jLabel2.setText("<html> Total Amount Due -  "+customer.getExpenditure()+"<br/> Total Points - "+customer.getTotalPointsEarned()+"<br/> Points Redeemed -  "+customer.getPointsUsed()+"</html>");        
     }
     
     /**
@@ -103,15 +105,14 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                         .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnApplyCard, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(btnManageShopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(btnManageRedemption, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))))
-                .addContainerGap(358, Short.MAX_VALUE))
+                            .addComponent(btnManageShopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnManageRedemption, javax.swing.GroupLayout.PREFERRED_SIZE, 159, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(91, 91, 91)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,8 +120,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 .addGap(25, 25, 25)
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 62, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(57, 57, 57)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
                 .addComponent(btnApplyCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageShopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -148,8 +149,8 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
     private void btnManageRedemptionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManageRedemptionActionPerformed
 //       ManageMerchantJPanel mer = new ManageMerchantJPanel(userProcessContainer, ecosystem, merchantsDirectory);
-       MerchantPage mer = new MerchantPage(userProcessContainer,account, ecosystem, merchantsDirectory);
-       userProcessContainer.add("EmployeeManagement",mer);
+       ManageRedemptionJPanel mer = new ManageRedemptionJPanel(userProcessContainer,account, ecosystem, merchantsDirectory, customer);
+       userProcessContainer.add("manageVoucher",mer);
        CardLayout layout=(CardLayout)userProcessContainer.getLayout();
        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageRedemptionActionPerformed

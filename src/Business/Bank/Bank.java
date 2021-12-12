@@ -13,11 +13,21 @@ public class Bank {
     private String name;
     private String code;
     private String mainBranchAdress;
+    private String username;
 
-    public Bank(String name, String code, String mainBranchAdress) {
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Bank(String name, String code, String mainBranchAdress, String username) {
         this.name = name;
         this.code = code;
         this.mainBranchAdress = mainBranchAdress;
+        this.username=username;
     }
 
     public String getName() {

@@ -162,7 +162,7 @@ public class ApplyCardJPanel extends javax.swing.JPanel {
         CardType ct = ecoSystem.getCardTypeList().getCardTypeList().get(index);
        
         for(Card card : ecoSystem.getCardDirectory().getCardDirectory()) {
-            if(card.getCardOwner() == customer && card.getCardType() == ct) {
+            if(card.getCardOwner() == customer && card.getCardType() == ct && (card.getStatus().equals(Card.statusActive) || card.getStatus().equals(Card.statusDisabled))) {
                 JOptionPane.showMessageDialog(null, "Card exists. Please wait for admin to approve the request if it is Pending.");
                 return;
             }
@@ -171,7 +171,8 @@ public class ApplyCardJPanel extends javax.swing.JPanel {
         System.out.println(account);
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy HH:mm");  
         LocalDateTime now = LocalDateTime.now();
-        ecoSystem.getCardDirectory().newCard( "", dtf.format(now), "", "", 0, 0, 0, 0, ct, customer, Card.statusNew);
+        float limit =  ecoSystem.getCardTypeList().getCardTypeList().get(index).getLimit();
+        ecoSystem.getCardDirectory().newCard( "", dtf.format(now), "", "", limit, 0, 0, 0, ct, customer, Card.statusNew, limit);
         JOptionPane.showMessageDialog(null, "Card Applied");
         cardDetails.setText("");
         fillValue();

@@ -4,9 +4,6 @@
  */
 package Business.Customer;
 
-import Business.Product.Product;
-import java.util.ArrayList;
-import java.util.Date;
 
 /**
  *
@@ -23,8 +20,12 @@ public class Customer {
     private long bankBalance;
     private String userame;
     private String bankName;
-    private ArrayList<Shopping> shoppingList;
 
+    private float totalPointsEarned;
+    private float pointsUsed;
+    private float pointsRemaining;
+    private float expenditure;
+    
     public Customer(String name, String email, String phone, int age, long ssn, String address, String userame, String bankName, Long bankBalance) {
         this.name = name;
         this.email = email;
@@ -36,6 +37,10 @@ public class Customer {
         this.bankName = bankName;
         this.bankBalance = bankBalance;
         
+        totalPointsEarned = 0;
+        pointsUsed = 0;
+        pointsRemaining = 0;
+        expenditure = 0;
     }
 
     public String getName() {
@@ -110,23 +115,38 @@ public class Customer {
         this.bankBalance = bankBalance;
     }
 
-    public ArrayList<Shopping> getShoppingList() {
-        return shoppingList;
+    public float getTotalPointsEarned() {
+        return totalPointsEarned;
     }
 
-    public void setShoppingList(ArrayList<Shopping> shoppingList) {
-        this.shoppingList = shoppingList;
+    public void setTotalPointsEarned(float totalPointsEarned) {
+        this.totalPointsEarned = totalPointsEarned;
     }
 
-    public Shopping newShopping(String orderNumber, Product product, Customer customer, Date purchaseDate, String paymentMethod) {
-        Shopping shopping = new Shopping(orderNumber, product, customer, purchaseDate, paymentMethod);
-        shoppingList.add(shopping);
-        return shopping;
+    public float getPointsUsed() {
+        return pointsUsed;
     }
-    
-    public void removeShopping(Shopping shopping){
-        shoppingList.remove(shopping);
+
+    public void setPointsUsed(float pointsUsed) {
+        this.pointsUsed = pointsUsed;
     }
+
+    public float getPointsRemaining() {
+        return pointsRemaining;
+    }
+
+    public void setPointsRemaining(float pointsRemaining) {
+        this.pointsRemaining = pointsRemaining;
+    }
+
+    public float getExpenditure() {
+        return expenditure;
+    }
+
+    public void setExpenditure(float expenditure) {
+        this.expenditure = expenditure;
+    }
+
     
     @Override
     public String toString() {

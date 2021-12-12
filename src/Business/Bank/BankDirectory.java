@@ -26,8 +26,8 @@ public class BankDirectory {
         this.bankDirectory = bankDirectory;
     }
     
-    public Bank newBank(String name, String code, String address) {
-        Bank bank = new Bank(name, code, address);
+    public Bank newBank(String name, String code, String address, String username) {
+        Bank bank = new Bank(name, code, address, username);
         bankDirectory.add(bank);
         return bank;
     }
@@ -38,7 +38,7 @@ public class BankDirectory {
     
     public Bank getBank(String username) {
         for(Bank b : bankDirectory) {
-            if(b.getName().equals(username)) {
+            if(b.getUsername().equals(username)) {
                 return b;
             }
         }

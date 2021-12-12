@@ -29,14 +29,22 @@ public class CardDirectory {
         this.cardDirectory = cardDirectory;
     }
     
-    public Card newCard(String cardNumber, String expiryDate, String cardHolderName, String cvv, int creditLimit, int expenditure, int totalPointsEarned, int pointsRemaining, CardType cardType, Customer customer, String status) {
-        Card card = new Card(cardNumber, expiryDate, cardHolderName, cvv, creditLimit, expenditure, totalPointsEarned, pointsRemaining, cardType, customer, status);
+    public Card newCard(String cardNumber, String expiryDate, String cardHolderName, String cvv, float creditLimit, int expenditure, int totalPointsEarned, int pointsRemaining, CardType cardType, Customer customer, String status, float creditAvailable) {
+        Card card = new Card(cardNumber, expiryDate, cardHolderName, cvv, creditLimit, expenditure, totalPointsEarned, pointsRemaining, cardType, customer, status, creditAvailable);
         cardDirectory.add(card);
         return card;
     }
     
     public void removeCard(Card card) {
         cardDirectory.remove(card);
+    }
+    
+    public Card getCard(String cardNumber) {
+        for(Card c : cardDirectory) {
+            if(c.getCardNumber().equals(cardNumber))
+                return c;
+        }
+        return null;
     }
 
     

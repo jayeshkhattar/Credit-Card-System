@@ -26,9 +26,10 @@ public class AddCardJPanel extends javax.swing.JPanel {
     /**
      * Creates new form AddBankJPanel
      */
-     private JPanel userProcessContainer;
+    private JPanel userProcessContainer;
     private EcoSystem ecoSystem;
     private CardDirectory cardDirectory;
+    
     public AddCardJPanel(JPanel userProcessContainer, EcoSystem ecoSystem, CardDirectory cardDirectory) {
         initComponents();
         this.userProcessContainer = userProcessContainer;
@@ -175,7 +176,7 @@ public class AddCardJPanel extends javax.swing.JPanel {
         }
            
         System.out.println(ecoSystem.toString());
-        ecoSystem.getBankDirectory().newBank(bank.getText(),code.getText(),addre.getText());
+        ecoSystem.getBankDirectory().newBank(bank.getText(),code.getText(),addre.getText(),user.getText());
         Employee employee = ecoSystem.getEmployeeDirectory().createEmployee(bank.getText());
         UserAccount usserAccount = ecoSystem.getUserAccountDirectory().createUserAccount(user.getText(), pass.getText(), employee, new CustomerRole());
         JOptionPane.showMessageDialog(null, "Bank Profile Created");

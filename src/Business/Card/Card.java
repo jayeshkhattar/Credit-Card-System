@@ -6,7 +6,6 @@ package Business.Card;
 
 import Business.CardType.CardType;
 import Business.Customer.Customer;
-import java.util.Date;
 
 /**
  *
@@ -17,23 +16,28 @@ public class Card {
     private String cardNumber;
     private String expiryDate;
     private String cardHolderName;
-    private String cvv;    
-    private int creditLimit;
-    private int expenditure;
-    private int totalPointsEarned;
-    private int pointsRemaining;
+    private String cvv;
     private CardType cardType;
     private Customer cardOwner;
     private String status;
     private String reason;
+
+    private float totalPointsEarned;
+    private float pointsUsed;
+    private float pointsRemaining;
+    private float creditAvailable;
+    private float creditLimit;
+    private float expenditure;
     
-    public static final String statusNew = "New Application. Pending Approval";
+    
+    public static final String statusNew = "Pending Approval";
     public static final String statusActive = "Active";
     public static final String statusRejected = "Rejected";
     public static final String statusDisabled = "Disabled";
     
-
-    public Card(String cardNumber, String expiryDate, String cardHolderName, String cvv, int creditLimit, int expenditure, int totalPointsEarned, int pointsRemaining, CardType cardType, Customer cardOwner, String status) {
+    
+    
+    public Card(String cardNumber, String expiryDate, String cardHolderName, String cvv, float creditLimit, float expenditure, float totalPointsEarned, float pointsRemaining, CardType cardType, Customer cardOwner, String status, float creditAvailable) {
         this.cardNumber = cardNumber;
         this.expiryDate = expiryDate;
         this.cardHolderName = cardHolderName;
@@ -45,8 +49,17 @@ public class Card {
         this.cardType = cardType;
         this.cardOwner = cardOwner;
         this.status = status;
+        this.creditAvailable = creditAvailable;
+    }
+    
+    public float getCreditAvailable() {
+        return creditAvailable;
     }
 
+    public void setCreditAvailable() {
+        this.creditAvailable = creditLimit-expenditure;
+    }
+    
     public String getCardNumber() {
         return cardNumber;
     }
@@ -87,35 +100,39 @@ public class Card {
         this.cvv = cvv;
     }
 
-    public int getCreditLimit() {
+    public float getCreditLimit() {
         return creditLimit;
     }
 
     public void setCreditLimit(int creditLimit) {
         this.creditLimit = creditLimit;
+        setCreditAvailable();
     }
 
-    public int getExpenditure() {
+    public float getExpenditure() {
         return expenditure;
     }
 
-    public void setExpenditure(int expenditure) {
+    public void setExpenditure(float expenditure) {
         this.expenditure = expenditure;
+        setCreditAvailable();
     }
+    
+    
 
-    public int getTotalPointsEarned() {
+    public float  getTotalPointsEarned() {
         return totalPointsEarned;
     }
 
-    public void setTotalPointsEarned(int totalPointsEarned) {
+    public void setTotalPointsEarned(float totalPointsEarned) {
         this.totalPointsEarned = totalPointsEarned;
     }
 
-    public int getPointsRemaining() {
+    public float getPointsRemaining() {
         return pointsRemaining;
     }
 
-    public void setPointsRemaining(int pointsRemaining) {
+    public void setPointsRemaining(float pointsRemaining) {
         this.pointsRemaining = pointsRemaining;
     }
 
@@ -134,6 +151,23 @@ public class Card {
     public void setStatus(String status) {
         this.status = status;
     }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public void setReason(String reason) {
+        this.reason = reason;
+    }
+
+    public float getPointsUsed() {
+        return pointsUsed;
+    }
+
+    public void setPointsUsed(float pointsUsed) {
+        this.pointsUsed = pointsUsed;
+    }
+    
     
     @Override
     public String toString() {
