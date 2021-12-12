@@ -50,8 +50,6 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         this.account = account;
         this.productDirectory = productDirectory;
         this.customer = customer;
-        this.dtm2 = (DefaultTableModel) cart.getModel();
-        dtm2.setRowCount(0);
         orderList = new ArrayList<Order>();
         paymentCardList = new ArrayList<String>();
         fillValue();
@@ -335,7 +333,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(qty, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(qty, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btnAdd))
                             .addGroup(layout.createSequentialGroup()
@@ -467,18 +465,21 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
 
         Product product = (Product) tblCustomer.getValueAt(selectedRow, 0);
         String orderNumber = "";
+        this.dtm2 = (DefaultTableModel) cart.getModel();
+        dtm2.setRowCount(0);
         Order order = new Order(orderNumber, product, qnty, customer, null, null); 
         orderList.add(order);
+        //totalamt = 0;
         for(Order ord : orderList){
             Object [] row = new Object[5];
             row[0] = ord.getProduct();
             row[1] = ord.getProduct().getName();
-            row[2] = ord.getProduct().getPrice()*qnty;
-            row[3] = qnty;
-            row[4] = ord.getProduct().getPrice()*qnty;
-            totalamt+=ord.getProduct().getPrice()*qnty;
+            row[2] = ord.getProduct().getPrice()*ord.getQuantity();
+            row[3] = ord.getQuantity();
+            row[4] = ord.getProduct().getPrice()*ord.getQuantity();
             dtm2.addRow(row);
         }
+        totalamt+= order.getProduct().getPrice()*order.getQuantity();
         totamt.setText(""+totalamt);
     }//GEN-LAST:event_btnAddActionPerformed
 
@@ -532,13 +533,19 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
             return;
         }
         
-        int selectedRow = tblCustomer.getSelectedRow();
+        int selectedRow = cart.getSelectedRow();
         if(selectedRow < 0) {
             JOptionPane.showMessageDialog(null,"Please Select a row from table first", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
-
+        System.out.println("---"+selectedRow);
+        for(Order ord : orderList){
+            System.out.println("-1-"+ord.getProduct().getName()+"--"+ord.getQuantity());
+        }
         orderList.remove(selectedRow);
+        for(Order ord : orderList){
+            System.out.println("-2-"+ord.getProduct().getName()+"--"+ord.getQuantity());
+        }
         totalamt = 0;
         this.dtm2 = (DefaultTableModel) cart.getModel();
         dtm2.setRowCount(0);

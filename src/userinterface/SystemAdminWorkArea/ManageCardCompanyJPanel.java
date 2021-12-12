@@ -75,7 +75,7 @@ public class ManageCardCompanyJPanel extends javax.swing.JPanel {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Name", "Company", "Card Type", "Points", "Limit"
+                "Company", "Code", "Card Type", "Points", "Limit"
             }
         ) {
             boolean[] canEdit = new boolean [] {
