@@ -229,19 +229,19 @@ public class AddCardCompanyJPanel extends javax.swing.JPanel {
         else if(str.equals("Platinum")){
             txtPoint.setEditable(true);
             txtLimit.setEditable(true);
-            txtPoint.setText("20");
+            txtPoint.setText("30");
             txtLimit.setText("300000");
         }
         else if(str.equals("Gold")){
             txtPoint.setEditable(true);
             txtLimit.setEditable(true);
-            txtPoint.setText("10");
+            txtPoint.setText("20");
             txtLimit.setText("200000");
         }
         else if(str.equals("Silver")){
             txtPoint.setEditable(true);
             txtLimit.setEditable(true);
-            txtPoint.setText("5");
+            txtPoint.setText("10");
             txtLimit.setText("100000");
         }
     }//GEN-LAST:event_comboActionPerformed

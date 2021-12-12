@@ -433,6 +433,11 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         ecoSystem.getCustomerDirectory().getCustomer(customer.getUserame()).setExpenditure(totalDueCustomer + totalamt);
         
         JOptionPane.showMessageDialog(null, "Congratulations - Your purchase is complete!");
+        this.dtm2 = (DefaultTableModel) cart.getModel();
+        dtm2.setRowCount(0);
+        orderList = new ArrayList<>();
+        totamt.setText("");
+        paymentList.setSelectedItem("Select");
         populateTable();
 
     }//GEN-LAST:event_btnShopActionPerformed
@@ -461,7 +466,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         dtm2.setRowCount(0);
         Order order = new Order(orderNumber, product, qnty, customer, null, null); 
         orderList.add(order);
-        //totalamt = 0;
+        totalamt = 0;
         for(Order ord : orderList){
             Object [] row = new Object[5];
             row[0] = ord.getProduct();
@@ -470,8 +475,8 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
             row[3] = ord.getQuantity();
             row[4] = ord.getProduct().getPrice()*ord.getQuantity();
             dtm2.addRow(row);
+            totalamt+= ord.getProduct().getPrice()*order.getQuantity();
         }
-        totalamt+= order.getProduct().getPrice()*order.getQuantity();
         totamt.setText(""+totalamt);
     }//GEN-LAST:event_btnAddActionPerformed
 

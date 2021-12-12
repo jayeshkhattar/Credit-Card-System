@@ -469,8 +469,6 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         for(Order ord : orderList) {
             ord.setPaymentMethod(card);
             ord.setOrderNumber("VOUCH#"+length);
-//            ord.setPurchaseDate(dtf.format(now)+"");
-//            pointsEarned += ord.getPointsEarned();
        }
 
         if((ecoSystem.getCustomerDirectory().getCustomer(customer.getUserame()).getTotalPointsEarned()-Integer.parseInt(totamt.getText()))>=0)
@@ -478,19 +476,27 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
             ecoSystem.getCustomerDirectory().getCustomer(customer.getUserame()).setTotalPointsEarned( remainingPoints);
             ecoSystem.getOrderHistory().addOrderList(orderList);            
             JOptionPane.showMessageDialog(null, "Congratulations - Your purchase is complete!");
-//            completion.setVisible(true);
-//            completion.setText("Congratulations - Your purchase is complete!");
         }
-        else
-        {
+        else {
             JOptionPane.showMessageDialog(null, " Uh oh! You do not have enough Points.");
         }
-        
-        
-        for(Order ord : orderList) {
-            ord.setPaymentMethod(card);
-        }
+
         ecoSystem.getOrderHistory().addOrderList(orderList);  
+
+        float expend = totalamt;
+        ecoSystem.getCardDirectory().getCard(card.getCardNumber()).setExpenditure(expend);
+
+        float totalPointsRemaing = ecoSystem.getCardDirectory().getCard(card.getCardNumber()).getPointsRemaining();
+        ecoSystem.getCardDirectory().getCard(card.getCardNumber()).setPointsRemaining(totalPointsRemaing + expend);
+        
+        float pointsUsedCustomer = ecoSystem.getCustomerDirectory().getCustomer(customer.getUserame()).getPointsUsed();
+        ecoSystem.getCustomerDirectory().getCustomer(customer.getUserame()).setExpenditure(pointsUsedCustomer + expend);
+        
+        this.dtm2 = (DefaultTableModel) cart.getModel();
+        dtm2.setRowCount(0);
+        orderList = new ArrayList<>();
+        totamt.setText("");
+        paymentList.setSelectedItem("Select");
     }//GEN-LAST:event_btnCheckoutActionPerformed
 
     private void btnAddtoCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddtoCartActionPerformed

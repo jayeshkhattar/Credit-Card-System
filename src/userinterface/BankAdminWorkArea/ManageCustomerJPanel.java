@@ -76,7 +76,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnNew = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
-        btnDelete1 = new javax.swing.JButton();
+        btnDelete = new javax.swing.JButton();
 
         tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -124,10 +124,10 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
             }
         });
 
-        btnDelete1.setText("Delete");
-        btnDelete1.addActionListener(new java.awt.event.ActionListener() {
+        btnDelete.setText("Delete");
+        btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnDelete1ActionPerformed(evt);
+                btnDeleteActionPerformed(evt);
             }
         });
 
@@ -148,7 +148,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                             .addComponent(btnUpdate, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnDelete1))
+                            .addComponent(btnDelete))
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 635, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -164,7 +164,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNew, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnUpdate)
-                    .addComponent(btnDelete1))
+                    .addComponent(btnDelete))
                 .addContainerGap(346, Short.MAX_VALUE))
         );
 
@@ -205,7 +205,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         layout.next(userProcessContainer);
     }//GEN-LAST:event_btnNewActionPerformed
 
-    private void btnDelete1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDelete1ActionPerformed
+    private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
         // TODO add your handling code here:
          int selectedRow = tblCustomer.getSelectedRow();
         if(selectedRow < 0) {
@@ -220,7 +220,7 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         ecoSystem.getUserAccountDirectory().removeUser(employee);
 
         populateTable();
-    }//GEN-LAST:event_btnDelete1ActionPerformed
+    }//GEN-LAST:event_btnDeleteActionPerformed
 
     private void btnUpdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnUpdateActionPerformed
         // TODO add your handling code here:
@@ -234,12 +234,12 @@ public class ManageCustomerJPanel extends javax.swing.JPanel {
         userProcessContainer.add("ModifyMerchantPanel",modifyCustomer);
         CardLayout layout=(CardLayout)userProcessContainer.getLayout();
         layout.next(userProcessContainer);
-    }//GEN-LAST:event_btnUpdateActionPerformed
+    }
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBack;
-    private javax.swing.JButton btnDelete1;
+    private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnNew;
     private javax.swing.JButton btnUpdate;
     private javax.swing.JLabel jLabel1;

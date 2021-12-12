@@ -52,12 +52,13 @@ public class ApplyCardJPanel extends javax.swing.JPanel {
         cc.setRowCount(0);
         for(Card card : ecoSystem.getCardDirectory().getCardDirectory()){
             if(card.getCardOwner() == customer) {
-                Object [] row = new Object[5];
+                Object [] row = new Object[6];
                 row[0] = card;
                 row[1] = card.getCardType();
                 row[2] = card.getCreditLimit();
-                row[3] = card.getStatus();
-                row[4] = card.getCardNumber();
+                row[3] = card.getCreditAvailable();
+                row[4] = card.getStatus();
+                row[5] = card.getCardNumber();
                 cc.addRow(row);
             }
         }
@@ -116,17 +117,17 @@ public class ApplyCardJPanel extends javax.swing.JPanel {
 
         tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                "Card Provider", "Card Type", "Limit", "Status", "Card Number"
+                "Card Provider", "Card Type", "Limit", "Available Credit", "Status", "Card Number"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -199,7 +200,7 @@ public class ApplyCardJPanel extends javax.swing.JPanel {
        
         for(Card card : ecoSystem.getCardDirectory().getCardDirectory()) {
             if(card.getCardOwner() == customer && card.getCardType() == ct && (card.getStatus().equals(Card.statusActive) || card.getStatus().equals(Card.statusDisabled))) {
-                JOptionPane.showMessageDialog(null, "Card exists. Please wait for admin to approve the request if it is Pending.");
+                JOptionPane.showMessageDialog(null, "Card exists. Please wait for admin to approve the request if it is pending.");
                 return;
             }
         }
