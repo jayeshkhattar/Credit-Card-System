@@ -47,8 +47,12 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     }
     
     public void setText() {
-        customer = ecosystem.getCustomerDirectory().getCustomer(account.getUsername());        
-        jLabel2.setText("<html> Total Amount Due -  "+customer.getExpenditure()+"<br/> Total Points - "+customer.getTotalPointsEarned()+"<br/> Points Redeemed -  "+customer.getPointsUsed()+"</html>");        
+        customer = ecosystem.getCustomerDirectory().getCustomer(account.getUsername());  
+        String roha = "<html> <table style=\"border: 1px solid black;\"> > <tr style=\"border: 1px solid black;\"> > "
+                + "<td style=\"border: 1px solid black;\"> Total Amount Due <td/><td style=\"border: 1px solid black;\"> "+customer.getExpenditure()+"  <td/> </tr> <tr style=\"border: 1px solid black;\"> > "
+                + "<td style=\"border: 1px solid black;\"> Total Points <td/><td style=\"border: 1px solid black;\"> "+customer.getTotalPointsEarned()+"<td/> </tr> <tr style=\"border: 1px solid black;\"> >  "
+                + "<td style=\"border: 1px solid black;\"> Points Redeemed <td/><td style=\"border: 1px solid black;\"> "+  customer.getPointsUsed()+"<td/> <tr/> </html>";        
+        jLabel2.setText(roha);
     }
     
     /**
@@ -92,7 +96,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
-        jLabel2.setText("<html> Total Amount Due -  <br/> Total Points - <br/> Points Redeemed -  </html>");
+        jLabel2.setText("<html> \n<table>\n<tr>\n<td>Total Amount Due -  <td/>\n</tr>\n<tr>\n<td>Total Points - <td/>\n</tr>\n<tr> \n<td>Points Redeemed -  <td/>\n<tr/>\n</html>");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -101,18 +105,18 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                             .addComponent(btnApplyCard, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
                             .addComponent(btnManageShopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageRedemption, javax.swing.GroupLayout.PREFERRED_SIZE, 159, Short.MAX_VALUE)))
+                            .addComponent(btnManageRedemption, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(260, Short.MAX_VALUE))
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(365, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

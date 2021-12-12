@@ -52,12 +52,12 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         this.account=account;
         this.customer = customer;
         paymentCardList = new ArrayList<String>();
-        completion.setVisible(false);
         orderList = new ArrayList<Order>();
         this.dtm2 = (DefaultTableModel) cart.getModel();
         dtm2.setRowCount(0);
         fillvalues();
         populateTable();
+        voucherCategory.setEnabled(false);
     }
 
     public void populateTable() {
@@ -138,7 +138,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         MerchantList = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        productCategory = new javax.swing.JComboBox<>();
+        voucherCategory = new javax.swing.JComboBox<>();
         btnSearch = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         availablePoints = new javax.swing.JLabel();
@@ -150,7 +150,6 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         jScrollPane4 = new javax.swing.JScrollPane();
         orderHistory = new javax.swing.JTable();
         jLabel18 = new javax.swing.JLabel();
-        completion = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         paymentList = new javax.swing.JComboBox<>();
         btnDelete = new javax.swing.JButton();
@@ -191,10 +190,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
 
         merchantOffersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Offer", "Category", "Points Needed"
@@ -228,10 +224,10 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
 
         jLabel5.setText("Vocher Category");
 
-        productCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Electronics", "Clothing", "Food", "Home Decor", "Baby Products", "Beauty and Health" }));
-        productCategory.addActionListener(new java.awt.event.ActionListener() {
+        voucherCategory.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select", "Electronics", "Clothing", "Food", "Home Decor", "Baby Products", "Beauty and Health" }));
+        voucherCategory.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                productCategoryActionPerformed(evt);
+                voucherCategoryActionPerformed(evt);
             }
         });
 
@@ -249,10 +245,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
 
         cart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Cart Items", "Quantity", "Points Used"
@@ -303,11 +296,6 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         jLabel18.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel18.setText("Select Quantity");
 
-        completion.setFont(new java.awt.Font("Lucida Grande", 1, 18)); // NOI18N
-        completion.setForeground(new java.awt.Color(204, 0, 51));
-        completion.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        completion.setText("CONGRATULATIONS!!!");
-
         jLabel7.setText("Mode of Payment:");
 
         paymentList.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Select" }));
@@ -335,9 +323,6 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
                         .addComponent(btnBack)
                         .addGap(369, 369, 369)
                         .addComponent(lblHeader))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(488, 488, 488)
-                        .addComponent(completion))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
                         .addComponent(jLabel17))
@@ -377,7 +362,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
                                         .addGap(18, 18, 18)
                                         .addComponent(jLabel5)
                                         .addGap(9, 9, 9)
-                                        .addComponent(productCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(voucherCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addGap(12, 12, 12)
                                         .addComponent(btnSearch)))
                                 .addGap(50, 50, 50)
@@ -413,7 +398,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
                                 .addComponent(jLabel5))
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(1, 1, 1)
-                                .addComponent(productCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(voucherCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(btnSearch))
                         .addGap(7, 7, 7))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
@@ -447,9 +432,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
                                 .addComponent(btnDelete)))))
                 .addGap(18, 18, 18)
                 .addComponent(btnCheckout)
-                .addGap(38, 38, 38)
-                .addComponent(completion)
-                .addGap(16, 16, 16)
+                .addGap(78, 78, 78)
                 .addComponent(jLabel17)
                 .addGap(11, 11, 11)
                 .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -458,11 +441,17 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
 
     private void btnCheckoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCheckoutActionPerformed
         // TODO add your handling code here:
-        float remainingPoints = ecoSystem.getCustomerDirectory().getCustomer(customer.getUserame()).getTotalPointsEarned()-Integer.parseInt(totamt.getText());
+        DefaultTableModel cart1 = (DefaultTableModel) cart.getModel();
+        int rowSize = cart1.getRowCount();
+        if(rowSize <= 0) {
+            JOptionPane.showMessageDialog(null,"Cart is empty. Please add vouchers to confirm order.", "Warining", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
         int selectedRow =  paymentList.getSelectedIndex();
         Card card;
         if(selectedRow <= 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a payment method to continue", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Please Select a payment method to continue.", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
         else {
@@ -475,6 +464,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
             return;
         }
         int length = (ecoSystem.getOrderHistory() != null && ecoSystem.getOrderHistory().getOrderHistory() != null) ?  ecoSystem.getOrderHistory().getOrderHistory().size() : 0;        
+        float remainingPoints = ecoSystem.getCustomerDirectory().getCustomer(customer.getUserame()).getTotalPointsEarned()-Integer.parseInt(totamt.getText());
         
         for(Order ord : orderList) {
             ord.setPaymentMethod(card);
@@ -488,8 +478,8 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
             ecoSystem.getCustomerDirectory().getCustomer(customer.getUserame()).setTotalPointsEarned( remainingPoints);
             ecoSystem.getOrderHistory().addOrderList(orderList);            
             JOptionPane.showMessageDialog(null, "Congratulations - Your purchase is complete!");
-            completion.setVisible(true);
-            completion.setText("Congratulations - Your purchase is complete!");
+//            completion.setVisible(true);
+//            completion.setText("Congratulations - Your purchase is complete!");
         }
         else
         {
@@ -557,8 +547,13 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
 
     private void MerchantListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MerchantListActionPerformed
         String item = MerchantList.getSelectedItem().toString();
-        if(item != "Select") {
+        if(item.equals("Select")) {
+            voucherCategory.setSelectedItem("Select");
+            voucherCategory.setEnabled(false);
+        }
+        else if(item != "Select") {
             Merchant merchant = (Merchant) ecoSystem.getMerchantDirectory().getMerchant(item);
+            voucherCategory.setEnabled(true);
 
             ArrayList<String> categoryList = new ArrayList<String>();
             categoryList.add("Select");
@@ -568,19 +563,25 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
             }
             String[] cardTypeLstArray = new String[categoryList.size()];
             cardTypeLstArray = categoryList.toArray(cardTypeLstArray);
-            productCategory.setModel(new javax.swing.DefaultComboBoxModel(cardTypeLstArray));
+            voucherCategory.setModel(new javax.swing.DefaultComboBoxModel(cardTypeLstArray));
         }
     }//GEN-LAST:event_MerchantListActionPerformed
 
-    private void productCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productCategoryActionPerformed
+    private void voucherCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_voucherCategoryActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_productCategoryActionPerformed
+    }//GEN-LAST:event_voucherCategoryActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+
+        String rowi = voucherCategory.getSelectedItem().toString();
+        if(rowi.equals("Select")) {
+            JOptionPane.showMessageDialog(null,"Please select a category to proceed further.", "Warining", JOptionPane.WARNING_MESSAGE);
+            return;            
+        }
+
         DefaultTableModel dtm = (DefaultTableModel) merchantOffersTable.getModel();
         dtm.setRowCount(0);
-        String category = productCategory.getSelectedItem().toString();
+        String category = voucherCategory.getSelectedItem().toString();
         //Product product = ecoSystem.getProductDirectory().getProductDirectory();
         for(Voucher voucher : ecoSystem.getVoucherList().getVoucherList())
         {
@@ -644,7 +645,6 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
     private javax.swing.JButton btnDelete;
     private javax.swing.JButton btnSearch;
     private javax.swing.JTable cart;
-    private javax.swing.JLabel completion;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel17;
@@ -663,8 +663,8 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
     private javax.swing.JTable merchantOffersTable;
     private javax.swing.JTable orderHistory;
     private javax.swing.JComboBox<String> paymentList;
-    private javax.swing.JComboBox<String> productCategory;
     private javax.swing.JSpinner qty;
     private javax.swing.JLabel totamt;
+    private javax.swing.JComboBox<String> voucherCategory;
     // End of variables declaration//GEN-END:variables
 }

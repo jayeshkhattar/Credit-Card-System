@@ -53,6 +53,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         orderList = new ArrayList<Order>();
         paymentCardList = new ArrayList<String>();
         fillValue();
+        productCategory.setEnabled(false);
         populateTable();
     }
     public void fillValue() {
@@ -150,10 +151,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
 
         cart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
                 "Product Name", "Product Category", "Product Price", "Quantity"
@@ -180,10 +178,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
 
         orderHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null},
-                {null, null, null, null, null, null, null}
+
             },
             new String [] {
                 "Order #", "Product Name", "Product Price", "Quantity", "Points Earned", "Order Date", "Payment Method"
@@ -286,10 +281,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
 
         tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null},
-                {null, null, null},
-                {null, null, null},
-                {null, null, null}
+
             },
             new String [] {
                 "Product Name", "Product Category", "Product Price"
@@ -399,7 +391,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         int selectedRow =  paymentList.getSelectedIndex();
         Card card;
         if(selectedRow <= 0) {
-            JOptionPane.showMessageDialog(null,"Please Select a payment method to continue", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Please Select a payment method to continue.", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
         else {
@@ -442,7 +434,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         
         JOptionPane.showMessageDialog(null, "Congratulations - Your purchase is complete!");
         populateTable();
-        //card.setPoints()
+
     }//GEN-LAST:event_btnShopActionPerformed
 
     private void productCategoryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_productCategoryActionPerformed
@@ -458,7 +450,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         }
         int qnty = (int) qty.getValue();
         if(qnty <= 0) {
-            JOptionPane.showMessageDialog(null,"Quantity should be atleast 1", "Warining", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(null,"Quantity should be atleast 1.", "Warining", JOptionPane.WARNING_MESSAGE);
             return;
         }
         
@@ -484,7 +476,13 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
     }//GEN-LAST:event_btnAddActionPerformed
 
     private void btnSearchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSearchActionPerformed
-        // TODO add your handling code here:
+
+        String rowi = productCategory.getSelectedItem().toString();
+        if(rowi.equals("Select")) {
+            JOptionPane.showMessageDialog(null,"Please select a category to proceed further.", "Warining", JOptionPane.WARNING_MESSAGE);
+            return;            
+        }
+        
         DefaultTableModel dtm = (DefaultTableModel) tblCustomer.getModel();
         dtm.setRowCount(0);
         String category = productCategory.getSelectedItem().toString();
@@ -505,9 +503,13 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
 
     private void MerchantListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MerchantListActionPerformed
         String item = MerchantList.getSelectedItem().toString();
-        if(item != "Select") {
+        if(item.equals("Select")) {
+            productCategory.setSelectedItem("Select");
+            productCategory.setEnabled(false);
+        }
+        else if(item != "Select") {
             Merchant merchant = (Merchant) ecoSystem.getMerchantDirectory().getMerchant(item);
-
+            productCategory.setEnabled(true);
             ArrayList<String> categoryList = new ArrayList<String>();
             categoryList.add("Select");
             for(Product ct : ecoSystem.getProductDirectory().getProductDirectory()) {
