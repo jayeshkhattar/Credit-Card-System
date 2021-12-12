@@ -16,6 +16,8 @@ import Business.CardType.CardTypeList;
 import Business.Merchant.MerchantDirectory;
 import Business.BankEmployee.BankEmployee;
 import Business.BankEmployee.BankEmployeeDirectory;
+import Business.PaymentMethod.PaymentMethod;
+import Business.PaymentMethod.PaymentMethodDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
 import java.util.ArrayList;
@@ -43,6 +45,8 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
     private Bank bank;
     private BankEmployee bankEmployee;
     private BankEmployeeDirectory bankEmployeeDirectory;
+    private  PaymentMethod paymentMethod;
+    private  PaymentMethodDirectory paymentMethodDirectory;
     
     public BankAdminWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem) {
         initComponents();
@@ -54,6 +58,7 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
         this.cardDirectory = ecosystem.getCardDirectory();
         this.bankEmployee = bankEmployee;
         this.bankEmployeeDirectory = ecosystem.getBankEmployeeDirectory();
+        this.paymentMethodDirectory = ecosystem.getPaymentMethodDirectory();
         
         bank = ecosystem.getBankDirectory().getBank(account.getUsername());
     }
@@ -73,6 +78,7 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
         btnManageCustomers = new javax.swing.JButton();
         btnManageCreditCards = new javax.swing.JButton();
         btnManageEmployees = new javax.swing.JButton();
+        btnPayment = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -80,7 +86,7 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 88, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,6 +120,13 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnPayment.setText("Manage Payments Gateway");
+        btnPayment.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPaymentActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -130,8 +143,9 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(btnManageCreditCards, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(btnManageCustomers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageEmployees, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(283, Short.MAX_VALUE))
+                            .addComponent(btnManageEmployees, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnPayment, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(371, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -146,7 +160,9 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(btnManageCreditCards)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageEmployees)
-                .addContainerGap(189, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(btnPayment)
+                .addContainerGap(156, Short.MAX_VALUE))
         );
 
         jSplitPane.setRightComponent(jPanel2);
@@ -176,11 +192,20 @@ public class BankAdminWorkAreaJPanel extends javax.swing.JPanel {
        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageEmployeesActionPerformed
 
+    private void btnPaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPaymentActionPerformed
+        // TODO add your handling code here:
+       ManagePaymentGatewayJPanel mer = new ManagePaymentGatewayJPanel(userProcessContainer,account, ecosystem, paymentMethodDirectory);
+       userProcessContainer.add("PaymentGatewayManagement",mer);
+       CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+       layout.next(userProcessContainer);
+    }//GEN-LAST:event_btnPaymentActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnManageCreditCards;
     private javax.swing.JButton btnManageCustomers;
     private javax.swing.JButton btnManageEmployees;
+    private javax.swing.JButton btnPayment;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;

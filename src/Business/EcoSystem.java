@@ -18,7 +18,8 @@ import Business.Product.ProductDirectory;
 import Business.Voucher.VoucherList;
 import Business.BankEmployee.BankEmployeeDirectory;
 import Business.Order.OrderHistory;
-
+import Business.PaymentMethod.PaymentMethodDirectory;
+import Business.Transaction.TransactionDirectory;
 
 /**
  *
@@ -36,6 +37,8 @@ public class EcoSystem extends Organization{
     private VoucherList voucherList;
     private BankEmployeeDirectory bankEmployeeDirectory;
     private OrderHistory orderHistory;
+    private PaymentMethodDirectory paymentMethodDirectory;
+    private TransactionDirectory transactionDirectory;
     
 
     public EcoSystem() {
@@ -49,6 +52,8 @@ public class EcoSystem extends Organization{
         voucherList = new VoucherList();
         bankEmployeeDirectory = new BankEmployeeDirectory();
         orderHistory = new OrderHistory();
+        paymentMethodDirectory = new PaymentMethodDirectory();
+        transactionDirectory = new TransactionDirectory();
     }
 
     public CustomerDirectory getCustomerDirectory() {
@@ -131,7 +136,20 @@ public class EcoSystem extends Organization{
     public void setOrderHistory(OrderHistory orderHistory) {
         this.orderHistory = orderHistory;
     }
-    
+     public PaymentMethodDirectory getPaymentMethodDirectory() {
+        return paymentMethodDirectory;
+    }
+
+    public void setPaymentMethodDirectory(PaymentMethodDirectory paymentMethodDirectory) {
+        this.paymentMethodDirectory = paymentMethodDirectory;
+    }
+    public TransactionDirectory getTransactionDirectory() {
+        return transactionDirectory;
+    }
+
+    public void setTransactionDirectory(TransactionDirectory transactionDirectory) {
+        this.transactionDirectory = transactionDirectory;
+    }
     
     @Override
     public ArrayList<Role> getSupportedRole() {

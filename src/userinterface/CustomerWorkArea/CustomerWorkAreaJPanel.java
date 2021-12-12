@@ -10,6 +10,7 @@ import Business.EcoSystem;
 import Business.Card.CardDirectory;
 import Business.CardType.CardTypeList;
 import Business.Merchant.MerchantDirectory;
+import Business.PaymentMethod.PaymentMethodDirectory;
 import Business.Product.ProductDirectory;
 import Business.UserAccount.UserAccount;
 import java.awt.CardLayout;
@@ -33,6 +34,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private UserAccount account;
     private ProductDirectory productDirectory;
     private Customer customer;
+    private PaymentMethodDirectory paymentMethodDirectory;
     
     public CustomerWorkAreaJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecosystem) {
         initComponents();
@@ -42,12 +44,13 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         this.cardTypeList = ecosystem.getCardTypeList();
         this.cardDirectory = ecosystem.getCardDirectory();
         this.productDirectory = ecosystem.getProductDirectory();
+        this.paymentMethodDirectory = ecosystem.getPaymentMethodDirectory();
         customer = ecosystem.getCustomerDirectory().getCustomer(account.getUsername());
         setText();
     }
     
     public void setText() {
-        customer = ecosystem.getCustomerDirectory().getCustomer(account.getUsername());  
+        customer = ecosystem.getCustomerDirectory().getCustomer(account.getUsername());        
         String roha = "<html> <table style=\"border: 1px solid black;\"> > <tr style=\"border: 1px solid black;\"> > "
                 + "<td style=\"border: 1px solid black;\"> Total Amount Due <td/><td style=\"border: 1px solid black;\"> "+customer.getExpenditure()+"  <td/> </tr> <tr style=\"border: 1px solid black;\"> > "
                 + "<td style=\"border: 1px solid black;\"> Total Points <td/><td style=\"border: 1px solid black;\"> "+customer.getTotalPointsEarned()+"<td/> </tr> <tr style=\"border: 1px solid black;\"> >  "
@@ -70,6 +73,7 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
         btnManageShopping = new javax.swing.JButton();
         btnManageRedemption = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
+        payment1 = new javax.swing.JButton();
 
         setLayout(new java.awt.BorderLayout());
 
@@ -98,6 +102,13 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
 
         jLabel2.setText("<html> \n<table>\n<tr>\n<td>Total Amount Due -  <td/>\n</tr>\n<tr>\n<td>Total Points - <td/>\n</tr>\n<tr> \n<td>Points Redeemed -  <td/>\n<tr/>\n</html>");
 
+        payment1.setText("Manage Payment");
+        payment1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                payment1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -105,18 +116,19 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(91, 91, 91)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(btnApplyCard, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
-                            .addComponent(btnManageShopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(btnManageRedemption, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)))
+                        .addGap(37, 37, 37)
+                        .addComponent(jLabel1))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(91, 91, 91)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(365, Short.MAX_VALUE))
+                        .addGap(91, 91, 91)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(btnApplyCard, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                            .addComponent(btnManageShopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnManageRedemption, javax.swing.GroupLayout.DEFAULT_SIZE, 159, Short.MAX_VALUE)
+                            .addComponent(payment1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(260, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -125,12 +137,14 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnApplyCard, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnManageShopping, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnManageRedemption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnManageRedemption, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
+                .addComponent(payment1))
         );
 
         add(jPanel2, java.awt.BorderLayout.PAGE_START);
@@ -159,6 +173,14 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
        layout.next(userProcessContainer);
     }//GEN-LAST:event_btnManageRedemptionActionPerformed
 
+    private void payment1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_payment1ActionPerformed
+        // TODO add your handling code here:
+        ManagePaymentJPanel mer = new ManagePaymentJPanel(userProcessContainer,account, ecosystem, paymentMethodDirectory, customer);
+       userProcessContainer.add("managePayment",mer);
+       CardLayout layout=(CardLayout)userProcessContainer.getLayout();
+       layout.next(userProcessContainer);
+    }//GEN-LAST:event_payment1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnApplyCard;
@@ -167,5 +189,6 @@ public class CustomerWorkAreaJPanel extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JButton payment1;
     // End of variables declaration//GEN-END:variables
 }
