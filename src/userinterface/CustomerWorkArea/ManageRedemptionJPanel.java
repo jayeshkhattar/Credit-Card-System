@@ -171,13 +171,16 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        lblHeader.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        lblHeader.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        lblHeader.setForeground(new java.awt.Color(0, 102, 204));
         lblHeader.setText("Manage Vocher Redemptions");
 
         qty.setValue(1);
 
+        btnAddtoCart.setBackground(new java.awt.Color(255, 255, 255));
         btnAddtoCart.setText("Add");
         btnAddtoCart.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,6 +191,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         jLabel17.setFont(new java.awt.Font("Lucida Grande", 1, 14)); // NOI18N
         jLabel17.setText("Redemptions List");
 
+        merchantOffersTable.setBackground(new java.awt.Color(204, 255, 204));
         merchantOffersTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -206,7 +210,9 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         });
         jScrollPane3.setViewportView(merchantOffersTable);
 
-        btnBack.setText("<< Back");
+        btnBack.setBackground(new java.awt.Color(255, 255, 255));
+        btnBack.setFont(new java.awt.Font("Times New Roman", 1, 24)); // NOI18N
+        btnBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/93634-2.png"))); // NOI18N
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBackActionPerformed(evt);
@@ -231,6 +237,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnSearch.setBackground(new java.awt.Color(255, 255, 255));
         btnSearch.setText("Search");
         btnSearch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,12 +250,13 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         availablePoints.setFont(new java.awt.Font("Lucida Grande", 0, 19)); // NOI18N
         availablePoints.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        cart.setBackground(new java.awt.Color(204, 255, 204));
         cart.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Cart Items", "Quantity", "Points Used"
+                "Cart Item", "Quantity", "Total Points"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -265,6 +273,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
 
         totamt.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
+        btnCheckout.setBackground(new java.awt.Color(255, 255, 255));
         btnCheckout.setText("Confirm Order");
         btnCheckout.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -272,12 +281,10 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
             }
         });
 
+        orderHistory.setBackground(new java.awt.Color(204, 255, 204));
         orderHistory.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null},
-                {null, null, null, null, null, null}
+
             },
             new String [] {
                 "Order #", "Voucher Name", "Quantity", "Points Redeemed", "Order Date", "Payment Method"
@@ -305,6 +312,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
             }
         });
 
+        btnDelete.setBackground(new java.awt.Color(255, 255, 255));
         btnDelete.setText("Delete");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -320,8 +328,8 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(btnBack)
-                        .addGap(369, 369, 369)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(408, 408, 408)
                         .addComponent(lblHeader))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
@@ -380,33 +388,36 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
                 .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblHeader)
                         .addGap(5, 5, 5)
-                        .addComponent(btnBack))
-                    .addComponent(lblHeader))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel4))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(MerchantList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(4, 4, 4)
+                                        .addComponent(jLabel5))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(1, 1, 1)
+                                        .addComponent(voucherCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(btnSearch))
+                                .addGap(7, 7, 7))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(availablePoints, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel4))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(MerchantList, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(4, 4, 4)
-                                .addComponent(jLabel5))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addComponent(voucherCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(btnSearch))
-                        .addGap(7, 7, 7))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(availablePoints, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
+                        .addGap(5, 5, 5)
+                        .addComponent(btnBack, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
@@ -479,9 +490,8 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         }
         else {
             JOptionPane.showMessageDialog(null, " Uh oh! You do not have enough Points.");
+            return;
         }
-
-        ecoSystem.getOrderHistory().addOrderList(orderList);  
 
         float expend = totalamt;
         ecoSystem.getCardDirectory().getCard(card.getCardNumber()).setExpenditure(expend);
@@ -497,6 +507,7 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         orderList = new ArrayList<>();
         totamt.setText("");
         paymentList.setSelectedItem("Select");
+        populateTable();
     }//GEN-LAST:event_btnCheckoutActionPerformed
 
     private void btnAddtoCartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddtoCartActionPerformed
@@ -629,13 +640,11 @@ public class ManageRedemptionJPanel extends javax.swing.JPanel {
         this.dtm2 = (DefaultTableModel) cart.getModel();
         dtm2.setRowCount(0);
         for(Order ord : orderList){
-            Object [] row = new Object[5];
-            row[0] = ord.getProduct();
-            row[1] = ord.getProduct().getName();
-            row[2] = ord.getProduct().getPrice()*ord.getQuantity();
-            row[3] = ord.getQuantity();
-            row[4] = ord.getProduct().getPrice()*ord.getQuantity();
-            totalamt+=ord.getProduct().getPrice()*ord.getQuantity();
+            Object [] row = new Object[4];
+            row[0] = ord.getVoucher();
+            row[1] = ord.getQuantity();
+            row[2] = ord.getVoucher().getPoints()*ord.getQuantity();
+            totalamt+=ord.getVoucher().getPoints()*ord.getQuantity();
             dtm2.addRow(row);
         }
         totamt.setText(""+totalamt);    

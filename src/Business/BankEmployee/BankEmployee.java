@@ -19,14 +19,15 @@ public class BankEmployee {
     private String code;
     private String phoneNumber;
     private Bank bank;
+    private String role;
 
-    public BankEmployee(String name, String address, String code, String phoneNumber, Bank bank) {//, ProductDirectory productDirectory
+    public BankEmployee(String name, String address, String code, String phoneNumber, String role, Bank bank) {
         this.name = name;
         this.address = address;
         this.code = code;
         this.phoneNumber = phoneNumber;
         this.bank = bank;
-        //this.productDirectory = productDirectory;
+        this.role = role;
     }
 
     public Bank getBank() {
@@ -69,6 +70,14 @@ public class BankEmployee {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 
 

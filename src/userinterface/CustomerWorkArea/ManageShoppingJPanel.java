@@ -86,7 +86,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         if(ecoSystem.getOrderHistory().getOrderHistory() != null) {
             for(Order order : ecoSystem.getOrderHistory().getOrderHistory()){
                 if(order.getCustomer() == customer && order.getIsProduct() == true) {
-                    Object [] row = new Object[7];
+                    Object [] row = new Object[8];
                     row[0] = order.getOrderNumber();
                     row[1] = order.getProduct().getName();
                     row[2] = order.getProduct().getPrice();
@@ -94,6 +94,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
                     row[4] = order.getPointsEarned();
                     row[5] = order.getPurchaseDate();
                     row[6] = order.getPaymentMethod().getCardNumber();
+                    row[7] = order.getStatus();
                     dtm.addRow(row);                
                 }
             }            
@@ -129,6 +130,8 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         MerchantList = new javax.swing.JComboBox<>();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -139,6 +142,8 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("MANAGE SHOPPING");
+
+        JPanel.setBackground(new java.awt.Color(255, 255, 255));
 
         btnShop.setText("Confirm Order");
         btnShop.addActionListener(new java.awt.event.ActionListener() {
@@ -181,11 +186,11 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
 
             },
             new String [] {
-                "Order #", "Product Name", "Product Price", "Quantity", "Points Earned", "Order Date", "Payment Method"
+                "Order #", "Product Name", "Product Price", "Quantity", "Points Earned", "Order Date", "Payment Method", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, true, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -211,7 +216,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
             .addGroup(JPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(JPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 1229, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, JPanelLayout.createSequentialGroup()
                         .addComponent(btnDelete)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -226,7 +231,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(totamt, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(6, 6, 6))))
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 1229, Short.MAX_VALUE)
+                    .addComponent(jScrollPane3)
                     .addGroup(JPanelLayout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(0, 0, Short.MAX_VALUE)))
@@ -249,7 +254,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
                 .addGap(14, 14, 14)
                 .addComponent(jLabel7)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 152, Short.MAX_VALUE))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE))
         );
 
         jLabel2.setText("Product Category");
@@ -318,7 +323,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1229, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnBack)
@@ -339,7 +344,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
                                 .addComponent(productCategory, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(30, 30, 30)
                                 .addComponent(btnSearch)))
-                        .addGap(0, 610, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -364,7 +369,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
                     .addComponent(btnAdd))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(JPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
         );
     }// </editor-fold>//GEN-END:initComponents
 
@@ -464,7 +469,7 @@ public class ManageShoppingJPanel extends javax.swing.JPanel {
         String orderNumber = "";
         this.dtm2 = (DefaultTableModel) cart.getModel();
         dtm2.setRowCount(0);
-        Order order = new Order(orderNumber, product, qnty, customer, null, null); 
+        Order order = new Order(orderNumber, product, qnty, customer, null, null, "Order Placed"); 
         orderList.add(order);
         totalamt = 0;
         for(Order ord : orderList){

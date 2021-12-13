@@ -17,6 +17,7 @@ import Business.Merchant.MerchantDirectory;
 import Business.Product.ProductDirectory;
 import Business.Voucher.VoucherList;
 import Business.BankEmployee.BankEmployeeDirectory;
+import Business.MerchantEmployee.MerchantEmployeeDirectory;
 import Business.Order.OrderHistory;
 import Business.PaymentMethod.PaymentMethodDirectory;
 import Business.Transaction.TransactionDirectory;
@@ -36,10 +37,10 @@ public class EcoSystem extends Organization{
     private CardDirectory cardDirectory;
     private VoucherList voucherList;
     private BankEmployeeDirectory bankEmployeeDirectory;
+    private MerchantEmployeeDirectory merchantEmployeeDirectory;
     private OrderHistory orderHistory;
     private PaymentMethodDirectory paymentMethodDirectory;
     private TransactionDirectory transactionDirectory;
-    
 
     public EcoSystem() {
         super(null);
@@ -54,6 +55,7 @@ public class EcoSystem extends Organization{
         orderHistory = new OrderHistory();
         paymentMethodDirectory = new PaymentMethodDirectory();
         transactionDirectory = new TransactionDirectory();
+        merchantEmployeeDirectory = new MerchantEmployeeDirectory();
     }
 
     public CustomerDirectory getCustomerDirectory() {
@@ -151,11 +153,20 @@ public class EcoSystem extends Organization{
         this.transactionDirectory = transactionDirectory;
     }
     
+   
     @Override
     public ArrayList<Role> getSupportedRole() {
         ArrayList<Role> roleList=new ArrayList<Role>();
         roleList.add(new SystemAdminRole());
         return roleList;
+    }
+
+    public MerchantEmployeeDirectory getMerchantEmployeeDirectory() {
+        return merchantEmployeeDirectory;
+    }
+
+    public void setMerchantEmployeeDirectory(MerchantEmployeeDirectory merchantEmployeeDirectory) {
+        this.merchantEmployeeDirectory = merchantEmployeeDirectory;
     }
 
     

@@ -31,7 +31,6 @@ public class ManageCustomerBankEmployeeJPanel extends javax.swing.JPanel {
     private CustomerDirectory customerDirectory;
     private UserAccount account;
     private Bank bank;
-    private UserAccountDirectory user_dir;
 
     public ManageCustomerBankEmployeeJPanel(JPanel userProcessContainer, UserAccount account, EcoSystem ecoSystem, CustomerDirectory customerDirectory, Bank bank) {
         initComponents();
@@ -40,7 +39,6 @@ public class ManageCustomerBankEmployeeJPanel extends javax.swing.JPanel {
         this.account = account;
         this.customerDirectory = customerDirectory;
         this.bank = bank;
-        this.user_dir = user_dir;
         populateTable();
     }
 
@@ -48,7 +46,7 @@ public class ManageCustomerBankEmployeeJPanel extends javax.swing.JPanel {
         DefaultTableModel cc = (DefaultTableModel) tblCustomer.getModel();
         cc.setRowCount(0);
         for(Customer customer : ecoSystem.getCustomerDirectory().getCustomerDirectory()){
-           // if(customer.getBankName().equals(bank.getName())) {
+           if(customer.getBankName().equals(bank.getName())) {
                 Object [] row = new Object[5];
                 row[0] = customer;
                 row[1] = customer.getAddress();
@@ -56,7 +54,7 @@ public class ManageCustomerBankEmployeeJPanel extends javax.swing.JPanel {
                 row[3] = customer.getPhone();
                 row[4] = customer.getBankBalance();
                 cc.addRow(row);
-           // }
+            }
         }
     }
     /**
@@ -75,6 +73,8 @@ public class ManageCustomerBankEmployeeJPanel extends javax.swing.JPanel {
         jLabel1 = new javax.swing.JLabel();
         btnNew = new javax.swing.JButton();
         btnUpdate = new javax.swing.JButton();
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         tblCustomer.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -160,21 +160,16 @@ public class ManageCustomerBankEmployeeJPanel extends javax.swing.JPanel {
         this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 719, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 539, Short.MAX_VALUE)
-            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
     }// </editor-fold>//GEN-END:initComponents
 

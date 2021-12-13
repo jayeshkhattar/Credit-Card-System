@@ -42,8 +42,8 @@ public class OrderHistory {
         this.orderHistory.addAll(orderList);
     }
 
-    public Order newOrder(String orderNumber, Product product, int quantity, Customer customer, String purchaseDate, Card paymentMethod) {
-        Order shopping = new Order(orderNumber, product, quantity, customer, purchaseDate, paymentMethod);
+    public Order newOrder(String orderNumber, Product product, int quantity, Customer customer, String purchaseDate, Card paymentMethod, String status) {
+        Order shopping = new Order(orderNumber, product, quantity, customer, purchaseDate, paymentMethod, status);
         orderHistory.add(shopping);
         return shopping;
     }
@@ -52,4 +52,11 @@ public class OrderHistory {
         orderHistory.remove(shopping);
     }
         
+    public Order getOrder(String orderNumber) {
+        for(Order or : orderHistory) {
+            if(or.getOrderNumber().equals(orderNumber)) 
+                return or;
+        }
+        return null;
+    }
 }

@@ -129,6 +129,8 @@ public class ApplyCardBankEmployeeJPanel extends javax.swing.JPanel {
         });
         jScrollPane1.setViewportView(tblCustomer);
 
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
         btnBack.setText("<< Back");
         btnBack.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

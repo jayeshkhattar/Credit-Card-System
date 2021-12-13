@@ -27,8 +27,8 @@ public class BankEmployeeDirectory {
         this.bankEmployeeDirectory = bankEmployeeDirectory;
     }
     
-    public BankEmployee newBankEmployee(String name, String address, String code, String phoneNumber, Bank bank) {
-        BankEmployee be = new BankEmployee(name, address, code, phoneNumber, bank);
+    public BankEmployee newBankEmployee(String name, String address, String code, String phoneNumber, String role, Bank bank) {
+        BankEmployee be = new BankEmployee(name, address, code, phoneNumber, role, bank);
         bankEmployeeDirectory.add(be);
         return be;
     }
@@ -38,9 +38,9 @@ public class BankEmployeeDirectory {
         
     }
     
-    public BankEmployee getBankEmployee(String name){
+    public BankEmployee getBankEmployee(String cpde){
         for(BankEmployee be: bankEmployeeDirectory){
-            if(be.getName().equalsIgnoreCase(name)){
+            if(be.getCode().equalsIgnoreCase(cpde)){
                 return be;
             }
         }

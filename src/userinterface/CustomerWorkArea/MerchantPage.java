@@ -131,6 +131,7 @@ public class MerchantPage extends javax.swing.JPanel {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setBackground(new java.awt.Color(255, 255, 255));
         setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel2.setText("Merchant Offer Redemption Page");

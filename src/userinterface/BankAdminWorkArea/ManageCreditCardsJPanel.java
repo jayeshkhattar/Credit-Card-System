@@ -77,6 +77,8 @@ public class ManageCreditCardsJPanel extends javax.swing.JPanel {
         btnReject = new javax.swing.JButton();
         btnDisable = new javax.swing.JButton();
 
+        setBackground(new java.awt.Color(255, 255, 255));
+
         tblCreditCard.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null},

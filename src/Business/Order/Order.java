@@ -25,6 +25,7 @@ public class Order {
     private Voucher voucher;
     private boolean isProduct;
     private float orderAmount;
+    private String status;
 
     public float getOrderAmount() {
         return orderAmount;
@@ -53,7 +54,16 @@ public class Order {
         return this.isProduct;
     }
 
-    public Order(String orderNumber, Product product, int quantity, Customer customer, String  purchaseDate, Card paymentMethod) {
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    
+    public Order(String orderNumber, Product product, int quantity, Customer customer, String  purchaseDate, Card paymentMethod, String status) {
         this.orderNumber = orderNumber;
         this.product = product;
         this.quantity = quantity;
@@ -61,6 +71,7 @@ public class Order {
         this.purchaseDate = purchaseDate;
         this.paymentMethod = paymentMethod;
         this.isProduct = true;
+        this.status = status;
     }
     
     public Order(String orderNumber, Voucher voucher, int quantity, Customer customer, String  purchaseDate, Card paymentMethod) {
@@ -132,5 +143,7 @@ public class Order {
     public float getPointsEarned() {
         return this.pointsEarned;
     }
+    
+    
     
 }
